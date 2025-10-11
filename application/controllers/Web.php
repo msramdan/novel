@@ -1,12 +1,13 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 
-class Web extends CI_Controller {
+class Web extends CI_Controller
+{
 
 	function __construct()
-    {
-        parent::__construct();
+	{
+		parent::__construct();
 		$this->load->model('Novel_model');
 		$this->load->model('Genre_model');
 		$this->load->model('User_model');
@@ -16,14 +17,14 @@ class Web extends CI_Controller {
 		$this->load->model('Member_model');
 		$this->load->model('Comment_model');
 		$this->load->model('Type_model');
-    }
+	}
 
 	public function index()
-	{	
+	{
 		/**
 		 * Novel Terbaru
 		 */
-		
+
 		$novel = $this->db->query("
 		SELECT max(novel_chapter.novel_chapter_id) as max, novel_chapter.created_at, novel.title, novel.rating, novel.novel_id, novel.thumbnail FROM `novel_chapter` JOIN novel ON novel_chapter.novel_id=novel.novel_id GROUP BY novel_chapter.novel_id ORDER BY max DESC LIMIT 8")->result();
 
@@ -52,12 +53,12 @@ class Web extends CI_Controller {
 		$novel_jepang = $this->db->where('type_id', 5)->order_by('novel_id', 'desc')->limit(10)->get('novel')->result();
 		//Novel Bahasa Korea
 		$novel_korea = $this->db->where('type_id', 6)->order_by('novel_id', 'desc')->limit(10)->get('novel')->result();
-		
+
 		/**
 		 * Novel List
 		 */
 		$this->db->reset_query();
-		$this->db->order_by('novel_id', 'desc');	
+		$this->db->order_by('novel_id', 'desc');
 		$this->db->limit(10);
 		$list_novel = $this->db->get('novel')->result();
 
@@ -74,18 +75,18 @@ class Web extends CI_Controller {
 		$data['list_novel'] = $list_novel;
 		$data['type_novel'] = $type_novel;
 		$data['genre'] = $genre;
-		$this->template->load('template_web','web/home', $data);
-	} 
+		$this->template->load('template_web', 'web/home', $data);
+	}
 
 	public function detail($id)
 	{
-		
+
 		$novel = $this->Novel_model->get_by_id(decrypt_url($id));
 
 		if (!$novel) {
 			redirect(site_url('/my404'));
 		}
-		
+
 		$novel_chapter = $this->Novel_chapter_model->get_by_novel_id(decrypt_url($id));
 		$novel_genre = $this->db->join('genre', 'genre.genre_id = novel_genre.genre_id')->where('novel_id', $novel->novel_id)->get('novel_genre')->result();
 
@@ -109,7 +110,7 @@ class Web extends CI_Controller {
 		}
 
 		$user = $this->Member_model->get_by_id($user->member_id);
-		
+
 		if (!$user) {
 			echo json_encode(['success' => false, 'message' => 'Gagal membeli chapter']);
 			exit;
@@ -148,18 +149,16 @@ class Web extends CI_Controller {
 				'type' => 'debit',
 				'nominal' => $chapter->harga,
 				'saldo' => $saldo,
-				'catatan' => 'Pembelian '.$chapter->nama_chapter.' dari novel '.$chapter->title.' sebesar '.$chapter->harga,
+				'catatan' => 'Pembelian ' . $chapter->nama_chapter . ' dari novel ' . $chapter->title . ' sebesar ' . $chapter->harga,
 				'trx_id' => $pembelian_chapter_id
 			]);
 			echo json_encode(['success' => true, 'message' => 'Berhasil melakukan pembelian chapter']);
 		} catch (\Exception $e) {
 			echo json_encode(['success' => false, 'message' => 'gagal melakukan pembelian chapter']);
 		}
-		
-
 	}
 
-	public function read($id) 
+	public function read($id)
 	{
 		$is_login = is_login_member();
 
@@ -167,7 +166,7 @@ class Web extends CI_Controller {
 
 		if (!$is_login) {
 			$this->session->set_flashdata('error', 'Silahkan login untuk membaca chapter ini');
-			redirect(site_url('/web/detail/'.encrypt_url($novel_chapter->novel_id)));
+			redirect(site_url('/web/detail/' . encrypt_url($novel_chapter->novel_id)));
 		}
 
 		$user = $this->session->userdata('user');
@@ -175,7 +174,7 @@ class Web extends CI_Controller {
 
 		if (!$check) {
 			$this->session->set_flashdata('error', 'Untuk membaca chapter ini silahkan beli chapter ini terlebih dahulu');
-			redirect(site_url('/web/detail/'.encrypt_url($novel_chapter->novel_id)));
+			redirect(site_url('/web/detail/' . encrypt_url($novel_chapter->novel_id)));
 		}
 
 		$parent_comments = $this->Comment_model->parent_comment();
@@ -184,7 +183,7 @@ class Web extends CI_Controller {
 		$data['parent_comments'] = $parent_comments;
 
 		$this->template->load('template_web', 'web/baca', $data);
- 	}
+	}
 
 	public function comment()
 	{
@@ -193,7 +192,7 @@ class Web extends CI_Controller {
 		$user = $this->session->userdata('user');
 		$novel_id = $this->input->post('novel_id', true);
 		$novel_chapter_id = $this->input->post('novel_chapter_id', true);
-		$reply_to = $this->input->post('reply_to', true) ? $this->input->post('reply_to') : null; 
+		$reply_to = $this->input->post('reply_to', true) ? $this->input->post('reply_to') : null;
 		$message = $this->input->post('message', true);
 
 		if (empty($message)) {
@@ -210,14 +209,14 @@ class Web extends CI_Controller {
 			'message' => $message
 		]);
 
-		redirect('web/read/'.encrypt_url($novel_chapter_id));
+		redirect('web/read/' . encrypt_url($novel_chapter_id));
 	}
 
 	public function load_more_comment()
 	{
 		$novel_chapter_id = $this->input->post('novel_chapter_id', true);
-		
-		$offset = $this->input->post('offset_comment', true) ;
+
+		$offset = $this->input->post('offset_comment', true);
 
 		$this->db->where('novel_chapter_id', $novel_chapter_id);
 		$this->db->order_by('comment_id', 'desc');
@@ -236,17 +235,17 @@ class Web extends CI_Controller {
 							C.novel_chapter_id,
 							C.message,
 							C.created_at,
-							(SELECT member.nama FROM comments CM LEFT JOIN member ON CM.reply_to = member.member_id WHERE CM.novel_chapter_id = ".$novel_chapter_id." AND CM.comment_id = C.comment_id ) AS user_reply,
+							(SELECT member.nama FROM comments CM LEFT JOIN member ON CM.reply_to = member.member_id WHERE CM.novel_chapter_id = " . $novel_chapter_id . " AND CM.comment_id = C.comment_id ) AS user_reply,
 							member.nama as user_sender
 							FROM comments C
 							LEFT JOIN member ON C.user_id_sender = member.member_id
-							WHERE C.novel_chapter_id = ".$novel_chapter_id."
+							WHERE C.novel_chapter_id = " . $novel_chapter_id . "
 							AND C.parent_id IS NULL
 							ORDER BY C.comment_id ASC
-							LIMIT 2 OFFSET ".$offset_comment."
+							LIMIT 2 OFFSET " . $offset_comment . "
 							")->result();
 		$child = [];
-		
+
 		foreach ($parent_comments as $i => $parent_comment) {
 			$child_comment = $this->db->query("SELECT 
 							C.comment_id,
@@ -258,19 +257,19 @@ class Web extends CI_Controller {
 							C.novel_chapter_id,
 							C.message,
 							C.created_at,
-							(SELECT member.nama FROM comments CM LEFT JOIN member ON CM.reply_to = member.member_id WHERE CM.novel_chapter_id = ".$novel_chapter_id." AND CM.comment_id = C.comment_id ) AS user_reply,
+							(SELECT member.nama FROM comments CM LEFT JOIN member ON CM.reply_to = member.member_id WHERE CM.novel_chapter_id = " . $novel_chapter_id . " AND CM.comment_id = C.comment_id ) AS user_reply,
 							member.nama as user_sender
 							FROM comments C
 							LEFT JOIN member ON C.user_id_sender = member.member_id
-							WHERE C.novel_chapter_id = ".$novel_chapter_id."
-							AND C.parent_id = ".$parent_comment->comment_id."
+							WHERE C.novel_chapter_id = " . $novel_chapter_id . "
+							AND C.parent_id = " . $parent_comment->comment_id . "
 							ORDER BY C.comment_id ASC
-							LIMIT 2 OFFSET ".$offset_comment."
+							LIMIT 2 OFFSET " . $offset_comment . "
 							")->result();
 
 			array_push($child, $child_comment);
 		}
-		
+
 		$data['parent_comments'] = $parent_comments;
 		$data['child_comment'] = $child;
 
@@ -279,12 +278,12 @@ class Web extends CI_Controller {
 
 	public function login()
 	{
-		$this->template->load('template_web','web/login');
+		$this->template->load('template_web', 'web/login');
 	}
 
 	public function register()
 	{
-		$this->template->load('template_web','web/register');
+		$this->template->load('template_web', 'web/register');
 	}
 
 	public function forgot_password()
@@ -294,12 +293,12 @@ class Web extends CI_Controller {
 
 	public function apk()
 	{
-		$this->template->load('template_web','web/apk');
+		$this->template->load('template_web', 'web/apk');
 	}
 
 	public function kontak()
 	{
-		$this->template->load('template_web','web/kontak');
+		$this->template->load('template_web', 'web/kontak');
 	}
 
 	public function daftar_novel()
@@ -314,28 +313,51 @@ class Web extends CI_Controller {
 		$to_price = $this->input->get('to_price') ? $this->input->get('to_price') : null;
 		$type = $this->input->get('type') ? $this->input->get('type') : null;
 
-		
+		// Build base URL tanpa parameter start
+		$query_params = $_GET;
+		unset($query_params['start']); // Hapus parameter start dari query
 
-		if (empty($filter) || (isset($filter['start']) && count($filter) <= 1 )) {
-			$url = base_url().'web/daftar_novel';
+		if (!empty($query_params)) {
+			$url = base_url() . 'web/daftar_novel?' . http_build_query($query_params);
 		} else {
-			$currentURL = current_url(); //for simple URL
-			$params = $_SERVER['QUERY_STRING']; //for parameters
-			$params = preg_replace("/&[start]+=\d/m",'', $params);
-			$url = $currentURL . '?' . $params; //full URL with parameter
+			$url = base_url() . 'web/daftar_novel';
 		}
 
-		$config['enable_query_string'] = true;
-		$config['page_query_string'] = true;
-		$config['per_page'] = 9;
+		// Konfigurasi Pagination
 		$config['base_url'] = $url;
 		$config['total_rows'] = $this->Novel_model->row_by_filter($filter);
+		$config['per_page'] = 8; // Diubah dari 9 menjadi 8
+		$config['page_query_string'] = true;
+		$config['query_string_segment'] = 'start';
+		$config['reuse_query_string'] = true;
 
-		$from = $this->input->get('start') ? html_escape($this->input->get('start')) : 0;
+		// Styling Pagination
+		$config['first_link'] = 'First';
+		$config['last_link'] = 'Last';
+		$config['next_link'] = 'Next';
+		$config['prev_link'] = 'Prev';
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><span>';
+		$config['cur_tag_close'] = '</span></li>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
 
-		$novels = $this->Novel_model->get_by_filter($filter, $config['per_page'], $from);
-				
 		$this->pagination->initialize($config);
+
+		// Get current page
+		$start = $this->input->get('start') ? $this->input->get('start') : 0;
+
+		// Get data dengan pagination
+		$novels = $this->Novel_model->get_by_filter($filter, $config['per_page'], $start);
 
 		$genres = $this->Genre_model->get_all();
 		$types = $this->Type_model->get_all();
@@ -349,7 +371,8 @@ class Web extends CI_Controller {
 		$data['novels'] = $novels;
 		$data['genres'] = $genres;
 		$data['types'] = $types;
-		
+		$data['pagination'] = $this->pagination->create_links();
+
 		$this->template->load('template_web', 'web/daftar_novel', $data);
 	}
 
@@ -357,7 +380,7 @@ class Web extends CI_Controller {
 	{
 		$search = $this->input->get('search') ? $this->input->get('search') : null;
 
-		
+
 		$this->db->like('novel.title', $search, 'both');
 		$this->db->order_by('novel.novel_id', 'desc');
 		$novel = $this->db->get('novel')->result();
@@ -374,14 +397,15 @@ class Web extends CI_Controller {
 		echo json_encode($result);
 	}
 
-	function get_autocomplete(){
-        if (isset($_GET['term'])) {
-            $result = $this->Novel_model->search_blog($_GET['term']);
-            if (count($result) > 0) {
-            foreach ($result as $row)
-                $arr_result[] = $row->title;
-                echo json_encode($arr_result);
-            }
-        }
-    }
+	function get_autocomplete()
+	{
+		if (isset($_GET['term'])) {
+			$result = $this->Novel_model->search_blog($_GET['term']);
+			if (count($result) > 0) {
+				foreach ($result as $row)
+					$arr_result[] = $row->title;
+				echo json_encode($arr_result);
+			}
+		}
+	}
 }

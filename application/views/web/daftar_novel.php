@@ -312,7 +312,9 @@
 				</div>
 
 				<div class="d-flex justify-content-center more-load-wrap text-center mt-50">
-					<?= $this->pagination->create_links(); ?>
+					<div class="pagination-container">
+						<?= $this->pagination->create_links(); ?>
+					</div>
 				</div>
 			</div>
 
@@ -326,6 +328,13 @@
 					--border-color: #e0e0e0;
 					--hr-color: #e0e0e0;
 					--shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+					--pagination-bg: #ffffff;
+					--pagination-border: #e2e8f0;
+					--pagination-color: #4a5568;
+					--pagination-hover-bg: #667eea;
+					--pagination-hover-color: #ffffff;
+					--pagination-active-bg: #667eea;
+					--pagination-active-color: #ffffff;
 				}
 
 				/* Mode Gelap */
@@ -337,6 +346,13 @@
 					--border-color: #333333;
 					--hr-color: #333333;
 					--shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+					--pagination-bg: #2d3748;
+					--pagination-border: #4a5568;
+					--pagination-color: #e2e8f0;
+					--pagination-hover-bg: #667eea;
+					--pagination-hover-color: #ffffff;
+					--pagination-active-bg: #667eea;
+					--pagination-active-color: #ffffff;
 				}
 
 				/* Aplikasi variabel CSS */
@@ -472,6 +488,169 @@
 				.author-container,
 				.title-container {
 					position: relative;
+				}
+
+				/* STYLING PAGINATION YANG DIPERBAIKI */
+				.pagination {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					gap: 8px;
+					margin: 30px 0;
+					flex-wrap: wrap;
+				}
+
+				.pagination li {
+					list-style: none;
+					margin: 0 2px;
+				}
+
+				.pagination a,
+				.pagination span {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					min-width: 40px;
+					height: 40px;
+					padding: 0 12px;
+					border: 1px solid var(--pagination-border);
+					background: var(--pagination-bg);
+					color: var(--pagination-color);
+					text-decoration: none;
+					border-radius: 8px;
+					font-size: 14px;
+					font-weight: 500;
+					transition: all 0.3s ease;
+					cursor: pointer;
+				}
+
+				.pagination a:hover {
+					background: var(--pagination-hover-bg);
+					color: var(--pagination-hover-color);
+					border-color: var(--pagination-hover-bg);
+					transform: translateY(-2px);
+					box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+				}
+
+				.pagination .active span {
+					background: var(--pagination-active-bg);
+					color: var(--pagination-active-color);
+					border-color: var(--pagination-active-bg);
+					font-weight: 600;
+					box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+				}
+
+				.pagination .disabled span {
+					background: var(--pagination-bg);
+					color: var(--text-muted);
+					border-color: var(--pagination-border);
+					cursor: not-allowed;
+					opacity: 0.6;
+				}
+
+				/* First and Last page buttons */
+				.pagination li:first-child a,
+				.pagination li:last-child a {
+					font-weight: 600;
+					background: linear-gradient(135deg, var(--pagination-bg) 0%, var(--pagination-border) 100%);
+				}
+
+				.pagination li:first-child a:hover,
+				.pagination li:last-child a:hover {
+					background: linear-gradient(135deg, var(--pagination-hover-bg) 0%, var(--pagination-hover-bg) 100%);
+				}
+
+				/* Previous and Next buttons */
+				.pagination li:nth-child(2) a,
+				.pagination li:nth-last-child(2) a {
+					font-weight: 500;
+					min-width: 80px;
+				}
+
+				/* Responsive Design */
+				@media (max-width: 768px) {
+					.pagination {
+						gap: 4px;
+					}
+
+					.pagination a,
+					.pagination span {
+						min-width: 36px;
+						height: 36px;
+						padding: 0 8px;
+						font-size: 12px;
+					}
+
+					.pagination li:nth-child(2) a,
+					.pagination li:nth-last-child(2) a {
+						min-width: 60px;
+						font-size: 12px;
+					}
+				}
+
+				@media (max-width: 480px) {
+					.pagination {
+						gap: 2px;
+					}
+
+					.pagination a,
+					.pagination span {
+						min-width: 32px;
+						height: 32px;
+						padding: 0 6px;
+						font-size: 11px;
+					}
+
+					.pagination li:nth-child(2) a,
+					.pagination li:nth-last-child(2) a {
+						min-width: 50px;
+						font-size: 11px;
+					}
+				}
+
+				/* Animation for page transitions */
+				@keyframes paginationPop {
+					0% {
+						transform: scale(0.8);
+						opacity: 0;
+					}
+
+					100% {
+						transform: scale(1);
+						opacity: 1;
+					}
+				}
+
+				.pagination li {
+					animation: paginationPop 0.3s ease-out;
+				}
+
+				.pagination li:nth-child(1) {
+					animation-delay: 0.05s;
+				}
+
+				.pagination li:nth-child(2) {
+					animation-delay: 0.1s;
+				}
+
+				.pagination li:nth-child(3) {
+					animation-delay: 0.15s;
+				}
+
+				.pagination li:nth-child(4) {
+					animation-delay: 0.2s;
+				}
+
+				.pagination li:nth-child(5) {
+					animation-delay: 0.25s;
+				}
+
+				.pagination li:nth-child(6) {
+					animation-delay: 0.3s;
+				}
+
+				.pagination li:nth-child(7) {
+					animation-delay: 0.35s;
 				}
 			</style>
 		</div>

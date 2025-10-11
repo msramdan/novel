@@ -233,9 +233,8 @@
 				</div>
 			</div>
 
-
 			<div class="col-lg-9">
-				<div class="row row-cols-lg-3 row-cols-sm-2 row-cols-1 gy-4">
+				<div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 gy-4">
 					<?php if (count($novels) > 0) { ?>
 						<?php foreach ($novels as $novel) : ?>
 							<div class="col pt-lg-0 pt-3">
@@ -244,29 +243,60 @@
 										<a href="<?= base_url() ?>web/detail/<?= encrypt_url($novel->novel_id) ?>">
 											<img src="<?= !empty($novel->thumbnail)
 															? base_url() . 'template/assets/img/novel/' . $novel->thumbnail
-															: base_url() . 'template/dummy.jpg' ?>"
-												alt="Thumbnail">
+															: base_url() . 'template/default.png' ?>"
+												alt="Thumbnail" style="height: 220px; object-fit: cover; width: 100%;">
 										</a>
 									</div>
 									<div class="nft__disc">
-										<a href="#" class="nft__creator">Author : <?= $novel->author ?><img src="<?= base_url() ?>assets/images/icons/tick-blue.svg" alt=""></a>
-
-										<div class="nft__title" style="height: 60px;">
-											<h5><a href="<?= base_url() ?>web/detail/<?= encrypt_url($novel->novel_id) ?>"><?= $novel->title ?></a></h5>
-											<ins class="current-price"><span><?= $novel->status ?></span></ins>
+										<!-- Author -->
+										<div class="author-container" style="margin-bottom: 6px; position: relative;">
+											<a href="#" class="nft__creator"
+												style="font-size: 11px; line-height: 1.2; display: block; 
+                                          white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+                                          text-decoration: none; color: #666;"
+												title="Author : <?= $novel->author ?>">
+												Author : <?= $novel->author ?>
+												<img src="<?= base_url() ?>assets/images/icons/tick-blue.svg" alt="" style="width: 12px; height: 12px; margin-left: 4px;">
+											</a>
 										</div>
 
-										<div class="nft__bottom">
-											<ul class="nft__actions d-flex">
-												<li>
-													<i class="fa fa-star" style="color: orange;" aria-hidden="true"></i>
+										<!-- Title -->
+										<div class="title-container" style="margin-bottom: 8px; position: relative;">
+											<h5 style="font-size: 13px; line-height: 1.3; margin: 0; height: 34px; overflow: hidden;">
+												<a href="<?= base_url() ?>web/detail/<?= encrypt_url($novel->novel_id) ?>"
+													class="novel-title"
+													style="font-size: 13px; text-decoration: none; color: #333;
+                                              display: -webkit-box;
+                                              -webkit-line-clamp: 2;
+                                              -webkit-box-orient: vertical;
+                                              overflow: hidden;"
+													title="<?= $novel->title ?>">
+													<?= $novel->title ?>
+												</a>
+											</h5>
+										</div>
+
+										<!-- Status -->
+										<div style="margin-bottom: 10px;">
+											<ins class="current-price status-badge 
+                                    <?= strtolower($novel->status) == 'completed' ? 'status-completed' : 'status-ongoing' ?>"
+												style="font-size: 10px; text-decoration: none; padding: 2px 6px; border-radius: 3px; display: inline-block;">
+												<span><?= $novel->status ?></span>
+											</ins>
+										</div>
+										<!-- Bottom Section - Rating & Date -->
+										<div class="nft__bottom" style="display: flex; justify-content: space-between; align-items: center;">
+											<ul class="nft__actions d-flex" style="margin: 0;">
+												<li style="font-size: 11px; display: flex; align-items: center; gap: 4px;">
+													<i class="fa fa-star" style="color: orange; font-size: 10px;" aria-hidden="true"></i>
 													<span><?= $novel->rating ?></span>
 												</li>
 											</ul>
-											<div class="nft__countdown"><?= date('d M Y', strtotime($novel->tgl_released)) ?></div>
+											<div class="nft__countdown" style="font-size: 10px; color: #666;">
+												<?= date('d M Y', strtotime($novel->tgl_released)) ?>
+											</div>
 										</div>
 									</div>
-
 								</div>
 							</div>
 						<?php endforeach; ?>
@@ -274,7 +304,7 @@
 						<div class="mx-auto">
 							<center>
 								<img height="200px" width="200px" src="<?= base_url() ?>template\web\assets\images\shapes\notfound.png" alt="">
-								<h4 class="novel-title-notfound mt-2">Novel Tidak Ditemukan</h4>
+								<h4 class="novel-title-notfound mt-2" style="font-size: 16px;">Novel Tidak Ditemukan</h4>
 							</center>
 						</div>
 					<?php } ?>
@@ -284,6 +314,65 @@
 					<?= $this->pagination->create_links(); ?>
 				</div>
 			</div>
+
+			<style>
+				.status-completed {
+					background-color: #d4edda;
+					color: #155724;
+					border: 1px solid #c3e6cb;
+				}
+
+				.status-ongoing {
+					background-color: #e2e3e5;
+					color: #383d41;
+					border: 1px solid #d6d8db;
+				}
+
+				.status-badge {
+					font-weight: 600;
+					letter-spacing: 0.3px;
+				}
+
+				.nft__disc {
+					padding: 12px;
+				}
+
+				/* Tooltip untuk title dan author */
+				.novel-title:hover::after,
+				.nft__creator:hover::after {
+					content: attr(title);
+					position: absolute;
+					bottom: 100%;
+					left: 50%;
+					transform: translateX(-50%);
+					background: rgba(0, 0, 0, 0.8);
+					color: white;
+					padding: 6px 10px;
+					border-radius: 4px;
+					font-size: 11px;
+					white-space: nowrap;
+					z-index: 1000;
+					margin-bottom: 5px;
+				}
+
+				.novel-title:hover::after {
+					width: auto;
+					max-width: 200px;
+					white-space: normal;
+					text-align: center;
+				}
+
+				.nft__creator:hover::after {
+					width: auto;
+					max-width: 150px;
+					white-space: nowrap;
+				}
+
+				.author-container,
+				.title-container {
+					position: relative;
+				}
+			</style>
 
 		</div>
 	</div>

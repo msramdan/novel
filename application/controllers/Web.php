@@ -25,7 +25,7 @@ class Web extends CI_Controller {
 		 */
 		
 		$novel = $this->db->query("
-		SELECT max(novel_chapter.novel_chapter_id) as max, novel_chapter.created_at, novel.title, novel.rating, novel.novel_id, novel.thumbnail FROM `novel_chapter` JOIN novel ON novel_chapter.novel_id=novel.novel_id GROUP BY novel_chapter.novel_id ORDER BY max DESC LIMIT 6")->result();
+		SELECT max(novel_chapter.novel_chapter_id) as max, novel_chapter.created_at, novel.title, novel.rating, novel.novel_id, novel.thumbnail FROM `novel_chapter` JOIN novel ON novel_chapter.novel_id=novel.novel_id GROUP BY novel_chapter.novel_id ORDER BY max DESC LIMIT 8")->result();
 
 		//Novel terpopuler
 		$novel_fav = $this->db->query("

@@ -20,7 +20,7 @@
 				<div>
 					<img src="<?= !empty($novel->thumbnail)
 									? base_url() . 'template/assets/img/novel/' . $novel->thumbnail
-									: base_url() . 'template/dummy.jpg' ?>"
+									: base_url() . 'template/default.png' ?>"
 						alt="Thumbnail"
 						style="width: 100%; height:550px; border-radius:5%;">
 				</div>

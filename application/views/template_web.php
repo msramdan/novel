@@ -82,17 +82,6 @@
 								<a class="logo-dark" href="<?= base_url() ?>"><img src="<?php echo base_url(); ?>template/assets/img/website/<?= $this->fungsi->sett_website()->logo ?>" alt="logo" style="width:230px"></a>
 								<a class="logo-light" href="<?= base_url() ?>"><img src="<?php echo base_url(); ?>template/assets/img/website/<?= $this->fungsi->sett_website()->logo ?>" alt="logo" style="width:230px"></a>
 							</div>
-							<!-- <div class="nav-search-style-one w-100 d-xl-block d-none">
-								<form action="<?= base_url() ?>web/daftar_novel" method="get">
-									<span class="search__icon">
-										<svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M8.26847 16.0378C12.2827 16.0378 15.5369 12.7834 15.5369 8.7689C15.5369 4.7544 12.2827 1.5 8.26847 1.5C4.2542 1.5 1 4.7544 1 8.7689C1 12.7834 4.2542 16.0378 8.26847 16.0378Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-											<path d="M17.0002 17.5L13.4023 13.9025" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-										</svg>
-									</span>
-									<input style="width: 250px;" type="text" placeholder="Cari Novel" name="search" value="<?= isset($search) ? (!empty($search) ? $search : '') : '' ?>" id="title2">
-								</form>
-							</div> -->
 						</div>
 						<div class="col-xxl-8 col-lg-8 col-10  d-flex justify-content-end">
 							<nav class="main-nav mr-2">
@@ -104,7 +93,6 @@
 									<li><a href="<?= base_url() ?>">Home</a></li>
 									<li><a href="<?= base_url() ?>web/daftar_novel">Daftar Novel</a></li>
 									<li><a href="<?= base_url() ?>web/apk">APK</a></li>
-									<!-- <li><a href="<?= base_url() ?>web/kontak">Kontak</a></li> -->
 									<?php $user = is_login_member(); ?>
 									<?php if (!$user) { ?>
 										<li><a href="<?= base_url() ?>web/register">Daftar</a></li>
@@ -132,18 +120,10 @@
 										</div>
 									</div>
 								<?php }  ?>
-
-								<!-- switch -->
 								<label class="theme-switch-one style__one mr-2">
 									<input type="checkbox" id="slider" class="check-status">
 									<span class="slider round"></span>
 								</label>
-								<!-- <button type="button" class="nav_search__icon mr-2 d-block d-xl-none mr-2 style__two" id="navSearch">
-									<svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-										<path d="M8.26847 16.0378C12.2827 16.0378 15.5369 12.7834 15.5369 8.7689C15.5369 4.7544 12.2827 1.5 8.26847 1.5C4.2542 1.5 1 4.7544 1 8.7689C1 12.7834 4.2542 16.0378 8.26847 16.0378Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-										<path d="M17.0002 17.5L13.4023 13.9025" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-									</svg>
-								</button> -->
 								<div class="d-flex align-items-center ml-2">
 									<div class="mobile-menu d-flex ">
 										<a href="javascript:void(0)" class="hamburger d-block d-xl-none">
@@ -172,29 +152,17 @@
 		</div>
 
 
-		<!-- latest bootstarp bundle -->
 		<script src="<?= base_url() ?>template/web/assets/js/bootstrap.bundle.min.js"></script>
-		<!-- swiper bundle -->
 		<script src="<?= base_url() ?>template/web/assets/js/swiper-bundle.min.js"></script>
-		<!-- wow js -->
 		<script src="<?= base_url() ?>template/web/assets/js/wow.min.js"></script>
-		<!-- nice select -->
 		<script src="<?= base_url() ?>template/web/assets/js/jquery.nice-select.min.js"></script>
-		<!-- jquery countdown -->
 		<script src="<?= base_url() ?>template/web/assets/js/jquery.countdown.js"></script>
-		<!-- dropzone js -->
 		<script src="<?= base_url() ?>template/web/assets/js/dropzone.min.js"></script>
-		<!-- fancybox -->
 		<script src="<?= base_url() ?>template/web/assets/js/jquery.fancybox.min.js"></script>
-		<!--Toaster JS-->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-		<!-- FontAwesome -->
-		<script src="<?= base_url() ?>template\web\assets\fontawesome-free-6.2.0\js\all.min.js"></script>
-		<!-- Datatables -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/js/all.min.js" integrity="sha512-6BTOlkauINO65nLhXhthZMtepgJSghyimIalb+crKRPhvhmsCdnIuGcVbR5/aQY2A+260iC1OPy1oCdB6pSSwQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		<script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-		<!-- Sweetalert 2 -->
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-		<!-- Custom JavaScript -->
 		<script async src="<?= base_url() ?>template/web/assets/js/main.js"></script>
 
 		<script type="text/javascript">

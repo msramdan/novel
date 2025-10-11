@@ -1,6 +1,5 @@
-<div class="reg__wrapper bg-body-2">
+<div class="reg__wrapper bg-body-2 section_gap_y_bottom__1 section_gap_y_top__1">
         <div class="container">
-			<br>
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="reg_form__wrap">

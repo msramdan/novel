@@ -1,3 +1,7 @@
+<style>
+
+</style>
+
 <div class="breadcrumb_style__one bg-body-2 ">
 	<div class="container">
 		<div class="row justify-content-center">
@@ -15,11 +19,10 @@
 <div class="marketplace_style_one bg-body-2 section_gap_y_bottom__1 ">
 	<div class="container">
 		<div class="row pt-40 gy-4">
+
 			<div class="col-lg-3">
-				<!-- sidebar searchbar -->
 				<form action="<?= base_url() ?>web/daftar_novel" method="get" id="form-search">
 					<div class="sidebar__searchbar">
-
 						<form action="<?= base_url() ?>web/daftar_novel" method="get">
 							<div class="sidebar__searchbar">
 								<input type="text" name="search" placeholder="Cari Novel" id="title" value="<?= isset($search) ? (!empty($search) ? $search : '') : '' ?>">
@@ -27,8 +30,8 @@
 									<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<path d="M7.35992 13.7206C10.8724 13.7206 13.7198 10.873 13.7198 7.36029C13.7198 3.8476 10.8724 1 7.35992 1C3.84743 1 1 3.8476 1 7.36029C1 10.873 3.84743 13.7206 7.35992 13.7206Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
 										<path d="M14.9997 15L11.8516 11.8522" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-									</svg>									
-								</button>							
+									</svg>
+								</button>
 							</div>
 						</form>
 						<?php if ($status) { ?>
@@ -43,23 +46,16 @@
 						<?php if (!empty($genre)) { ?>
 							<input type="hidden" name="genre" value="<?= json_encode($genre) ?>">
 						<?php } ?>
-						<!-- <button type="submit" class="submit__btn">
-							<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M7.35992 13.7206C10.8724 13.7206 13.7198 10.873 13.7198 7.36029C13.7198 3.8476 10.8724 1 7.35992 1C3.84743 1 1 3.8476 1 7.36029C1 10.873 3.84743 13.7206 7.35992 13.7206Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-								<path d="M14.9997 15L11.8516 11.8522" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-							</svg>
-						</button> -->
 					</div>
 				</form>
 
-				<!-- sidebar status filter -->
 				<div class="accordion-item sidebar_status__filter sidebar__filter ">
 					<h2 class="accordion-header sidebar__header" id="filterHeadingOne">
-						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#filter-collapseOne" aria-expanded="true" aria-controls="filter-collapseOne">
+						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#filter-collapseOne" aria-expanded="false" aria-controls="filter-collapseOne">
 							Status
 						</button>
 					</h2>
-					<div id="filter-collapseOne" class="accordion-collapse collapse show" aria-labelledby="filterHeadingOne">
+					<div id="filter-collapseOne" class="accordion-collapse collapse" aria-labelledby="filterHeadingOne">
 						<div class="accordion-body sidebar__body">
 							<form id="form-filter-status" action="<?= base_url() ?>web/daftar_novel" method="get">
 								<?php if ($from_price) { ?>
@@ -96,14 +92,13 @@
 					</div>
 				</div>
 
-				<!-- sidebar price filter -->
 				<div class="accordion-item sidebar_price__filter sidebar__filter ">
 					<h2 class="accordion-header sidebar__header" id="filterHeadingTwo">
-						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#filter-collapseTwo" aria-expanded="true" aria-controls="filter-collapseTwo">
+						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#filter-collapseTwo" aria-expanded="false" aria-controls="filter-collapseTwo">
 							Harga per chapter
 						</button>
 					</h2>
-					<div id="filter-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="filterHeadingTwo">
+					<div id="filter-collapseTwo" class="accordion-collapse collapse" aria-labelledby="filterHeadingTwo">
 						<div class="accordion-body sidebar__body">
 							<form action="<?= base_url() ?>web/daftar_novel" method="get">
 								<?php if ($status) { ?>
@@ -115,7 +110,7 @@
 								<?php if (!empty($genre)) { ?>
 									<input type="hidden" name="genre" value="<?= json_encode($genre) ?>">
 								<?php } ?>
-							
+
 								<div class="price__range">
 									<input type="number" value="<?= $from_price ? $from_price : 0 ?>" name="from_price" min="500" step="5">
 									<span>To</span>
@@ -128,14 +123,13 @@
 					</div>
 				</div>
 
-				<!-- sidebar Type filter -->
 				<div class="accordion-item sidebar_collections__filter sidebar__filter ">
-					<h2 class="accordion-header sidebar__header" id="filterHeadingFour">
-						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#filter-collapseFour" aria-expanded="true" aria-controls="filter-collapseFour">
+					<h2 class="accordion-header sidebar__header" id="filterHeadingThree">
+						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#filter-collapseThree" aria-expanded="false" aria-controls="filter-collapseThree">
 							Type
 						</button>
 					</h2>
-					<div id="filter-collapseFour" class="accordion-collapse collapse show" aria-labelledby="filterHeadingFour">
+					<div id="filter-collapseThree" class="accordion-collapse collapse" aria-labelledby="filterHeadingThree">
 						<div class="accordion-body sidebar__body">
 							<form action="<?= base_url() ?>web/daftar_novel" method="get">
 								<?php if ($from_price) { ?>
@@ -185,14 +179,13 @@
 					</div>
 				</div>
 
-				<!-- sidebar category filter -->
 				<div class="accordion-item sidebar_collections__filter sidebar__filter ">
 					<h2 class="accordion-header sidebar__header" id="filterHeadingFour">
-						<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#filter-collapseFour" aria-expanded="true" aria-controls="filter-collapseFour">
+						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#filter-collapseFour" aria-expanded="false" aria-controls="filter-collapseFour">
 							Genre
 						</button>
 					</h2>
-					<div id="filter-collapseFour" class="accordion-collapse collapse show" aria-labelledby="filterHeadingFour">
+					<div id="filter-collapseFour" class="accordion-collapse collapse" aria-labelledby="filterHeadingFour">
 						<div class="accordion-body sidebar__body">
 							<form action="<?= base_url() ?>web/daftar_novel" method="get">
 								<?php if ($from_price) { ?>
@@ -240,47 +233,51 @@
 				</div>
 			</div>
 
+
 			<div class="col-lg-9">
 				<div class="row row-cols-lg-3 row-cols-sm-2 row-cols-1 gy-4">
 					<?php if (count($novels) > 0) { ?>
-					<?php foreach ($novels as $novel) : ?>
-						<div class="col pt-lg-0 pt-3">
-							<div class="auction_card_style__two">
-								<div class="auction_card__thumb">
-									<a href="<?= base_url() ?>web/detail/<?= encrypt_url($novel->novel_id) ?>">
-										<img src="<?= base_url() ?>template/assets/img/novel/<?= $novel->thumbnail ?>" alt="">
-									</a>
-								</div>
-								<div class="nft__disc">
-									<a href="#" class="nft__creator">Author : <?= $novel->author ?><img src="<?= base_url() ?>assets/images/icons/tick-blue.svg" alt=""></a>
+						<?php foreach ($novels as $novel) : ?>
+							<div class="col pt-lg-0 pt-3">
+								<div class="auction_card_style__two">
+									<div class="auction_card__thumb">
+										<a href="<?= base_url() ?>web/detail/<?= encrypt_url($novel->novel_id) ?>">
+											<img src="<?= !empty($novel->thumbnail)
+															? base_url() . 'template/assets/img/novel/' . $novel->thumbnail
+															: base_url() . 'template/dummy.jpg' ?>"
+												alt="Thumbnail">
+										</a>
+									</div>
+									<div class="nft__disc">
+										<a href="#" class="nft__creator">Author : <?= $novel->author ?><img src="<?= base_url() ?>assets/images/icons/tick-blue.svg" alt=""></a>
 
-									<div class="nft__title" style="height: 60px;">
-										<h5><a href="<?= base_url() ?>web/detail/<?= encrypt_url($novel->novel_id) ?>"><?= $novel->title ?></a></h5>
-										<ins class="current-price"><span><?= $novel->status ?></span></ins>
+										<div class="nft__title" style="height: 60px;">
+											<h5><a href="<?= base_url() ?>web/detail/<?= encrypt_url($novel->novel_id) ?>"><?= $novel->title ?></a></h5>
+											<ins class="current-price"><span><?= $novel->status ?></span></ins>
+										</div>
+
+										<div class="nft__bottom">
+											<ul class="nft__actions d-flex">
+												<li>
+													<i class="fa fa-star" style="color: orange;" aria-hidden="true"></i>
+													<span><?= $novel->rating ?></span>
+												</li>
+											</ul>
+											<div class="nft__countdown"><?= date('d M Y', strtotime($novel->tgl_released)) ?></div>
+										</div>
 									</div>
 
-									<div class="nft__bottom">
-										<ul class="nft__actions d-flex">
-											<li>
-												<i class="fa fa-star" style="color: orange;" aria-hidden="true"></i>
-												<span><?= $novel->rating ?></span>
-											</li>
-										</ul>
-										<div class="nft__countdown"><?= date('d M Y', strtotime($novel->tgl_released)) ?></div>
-									</div>
 								</div>
-
 							</div>
-						</div>
-					<?php endforeach; ?>
+						<?php endforeach; ?>
 					<?php } else { ?>
 						<div class="mx-auto">
 							<center>
-								<img height="200px" width="200px" src="<?= base_url()?>template\web\assets\images\shapes\notfound.png" alt="">
+								<img height="200px" width="200px" src="<?= base_url() ?>template\web\assets\images\shapes\notfound.png" alt="">
 								<h4 class="novel-title-notfound mt-2">Novel Tidak Ditemukan</h4>
 							</center>
 						</div>
-					<?php }?>
+					<?php } ?>
 				</div>
 
 				<div class="d-flex justify-content-center more-load-wrap text-center mt-50">

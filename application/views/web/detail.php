@@ -18,7 +18,11 @@
 		<div class="row pt-40 gy-4">
 			<div class="offset-lg-1 col-lg-4">
 				<div>
-					<img src="<?= base_url() ?>template/assets/img/novel/<?= $novel->thumbnail ?>" alt="" style="width: 100%; height:550px;border-radius:5%;">
+					<img src="<?= !empty($novel->thumbnail)
+									? base_url() . 'template/assets/img/novel/' . $novel->thumbnail
+									: base_url() . 'template/dummy.jpg' ?>"
+						alt="Thumbnail"
+						style="width: 100%; height:550px; border-radius:5%;">
 				</div>
 			</div>
 
@@ -86,7 +90,7 @@
 										} else {
 											$check_chapter = null;
 										}
-										
+
 										?>
 
 										<?php if ($check_chapter) { ?>
@@ -161,7 +165,7 @@
 							animation: true,
 							timer: 4000,
 							timerProgressBar: true,
-						}).then( res => {
+						}).then(res => {
 							window.location.reload();
 						})
 					} else {

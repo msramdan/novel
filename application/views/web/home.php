@@ -1,3 +1,62 @@
+
+<style>
+/* Mode Terang (Default) */
+.theme-light-active {
+    --chapter-text: #4a5568;
+    --chapter-bg: #f7fafc;
+    --rating-color: #f6ad55;
+    --rating-text: #2d3748;
+}
+
+/* Mode Gelap */
+.theme-dark-active {
+    --chapter-text: #e2e8f0;
+    --chapter-bg: #2d3748;
+    --rating-color: #f6ad55;
+    --rating-text: #ffffff;
+}
+
+/* Styling untuk chapter terakhir */
+.current__bid span {
+    color: var(--chapter-text) !important;
+    background: var(--chapter-bg);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+/* Styling untuk rating */
+.card_countdown {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--rating-text) !important;
+}
+
+.card_countdown .fa-star {
+    color: var(--rating-color) !important;
+}
+
+.card_countdown span {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* Hover effects untuk card */
+.auction_card_style__one:hover .current__bid span {
+    background: var(--input-focus-border);
+    color: white !important;
+    transition: all 0.3s ease;
+}
+
+.auction_card_style__one:hover .card_countdown {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+</style>
+
 <div class="live_auction_style__one bg-body section_gap_y_top__2">
 	<div class="container">
 		<!-- Hot Novel Update -->
@@ -500,8 +559,6 @@
 
 	</div>
 </div>
-
-
 
 
 <div class="nft_grid_style__one bg-body section_gap_y_top__3 overflow-hidden">

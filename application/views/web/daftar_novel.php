@@ -253,7 +253,7 @@
 											<a href="#" class="nft__creator"
 												style="font-size: 11px; line-height: 1.2; display: block; 
                                           white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-                                          text-decoration: none; color: #666;"
+                                          text-decoration: none;"
 												title="Author : <?= $novel->author ?>">
 												Author : <?= $novel->author ?>
 												<img src="<?= base_url() ?>assets/images/icons/tick-blue.svg" alt="" style="width: 12px; height: 12px; margin-left: 4px;">
@@ -265,7 +265,7 @@
 											<h5 style="font-size: 13px; line-height: 1.3; margin: 0; height: 34px; overflow: hidden;">
 												<a href="<?= base_url() ?>web/detail/<?= encrypt_url($novel->novel_id) ?>"
 													class="novel-title"
-													style="font-size: 13px; text-decoration: none; color: #333;
+													style="font-size: 13px; text-decoration: none;
                                               display: -webkit-box;
                                               -webkit-line-clamp: 2;
                                               -webkit-box-orient: vertical;
@@ -284,15 +284,17 @@
 												<span><?= $novel->status ?></span>
 											</ins>
 										</div>
+
+
 										<!-- Bottom Section - Rating & Date -->
 										<div class="nft__bottom" style="display: flex; justify-content: space-between; align-items: center;">
 											<ul class="nft__actions d-flex" style="margin: 0;">
 												<li style="font-size: 11px; display: flex; align-items: center; gap: 4px;">
-													<i class="fa fa-star" style="color: orange; font-size: 10px;" aria-hidden="true"></i>
+													<i class="fa fa-star" style="font-size: 10px;" aria-hidden="true"></i>
 													<span><?= $novel->rating ?></span>
 												</li>
 											</ul>
-											<div class="nft__countdown" style="font-size: 10px; color: #666;">
+											<div class="nft__countdown" style="font-size: 10px;">
 												<?= date('d M Y', strtotime($novel->tgl_released)) ?>
 											</div>
 										</div>
@@ -303,7 +305,6 @@
 					<?php } else { ?>
 						<div class="mx-auto">
 							<center>
-								<img height="200px" width="200px" src="<?= base_url() ?>template\web\assets\images\shapes\notfound.png" alt="">
 								<h4 class="novel-title-notfound mt-2" style="font-size: 16px;">Novel Tidak Ditemukan</h4>
 							</center>
 						</div>
@@ -316,6 +317,74 @@
 			</div>
 
 			<style>
+				/* Mode Terang (Default) */
+				.theme-light-active {
+					--card-bg: #ffffff;
+					--text-primary: #333333;
+					--text-secondary: #666666;
+					--text-muted: #999999;
+					--border-color: #e0e0e0;
+					--hr-color: #e0e0e0;
+					--shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+				}
+
+				/* Mode Gelap */
+				.theme-dark-active {
+					--card-bg: #1e1e1e;
+					--text-primary: #ffffff;
+					--text-secondary: #cccccc;
+					--text-muted: #888888;
+					--border-color: #333333;
+					--hr-color: #333333;
+					--shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+				}
+
+				/* Aplikasi variabel CSS */
+				.auction_card_style__two {
+					background: var(--card-bg);
+					border-radius: 20px;
+					box-shadow: var(--shadow);
+					transition: all 0.3s ease;
+				}
+
+				.nft__disc {
+					padding: 12px;
+				}
+
+				/* Warna teks untuk mode gelap/terang */
+				.theme-light-active .novel-title {
+					color: var(--text-primary);
+				}
+
+				.theme-dark-active .novel-title {
+					color: var(--text-primary);
+				}
+
+				.theme-light-active .nft__creator {
+					color: var(--text-secondary);
+				}
+
+				.theme-dark-active .nft__creator {
+					color: var(--text-secondary);
+				}
+
+				.theme-light-active .nft__countdown {
+					color: var(--text-muted);
+				}
+
+				.theme-dark-active .nft__countdown {
+					color: var(--text-muted);
+				}
+
+				.theme-light-active hr {
+					border-top: 1px solid var(--hr-color);
+				}
+
+				.theme-dark-active hr {
+					border-top: 1px solid var(--hr-color);
+				}
+
+				/* Status badges */
 				.status-completed {
 					background-color: #d4edda;
 					color: #155724;
@@ -328,13 +397,39 @@
 					border: 1px solid #d6d8db;
 				}
 
+				.theme-dark-active .status-completed {
+					background-color: #155724;
+					color: #d4edda;
+					border: 1px solid #0f4018;
+				}
+
+				.theme-dark-active .status-ongoing {
+					background-color: #383d41;
+					color: #e2e3e5;
+					border: 1px solid #2a2e32;
+				}
+
 				.status-badge {
 					font-weight: 600;
 					letter-spacing: 0.3px;
 				}
 
-				.nft__disc {
-					padding: 12px;
+				/* Star icon color */
+				.theme-light-active .fa-star {
+					color: orange;
+				}
+
+				.theme-dark-active .fa-star {
+					color: #ffa500;
+				}
+
+				/* Not found text */
+				.theme-light-active .novel-title-notfound {
+					color: #333333;
+				}
+
+				.theme-dark-active .novel-title-notfound {
+					color: #ffffff;
 				}
 
 				/* Tooltip untuk title dan author */
@@ -355,6 +450,12 @@
 					margin-bottom: 5px;
 				}
 
+				.theme-dark-active .novel-title:hover::after,
+				.theme-dark-active .nft__creator:hover::after {
+					background: rgba(255, 255, 255, 0.9);
+					color: #000000;
+				}
+
 				.novel-title:hover::after {
 					width: auto;
 					max-width: 200px;
@@ -373,7 +474,6 @@
 					position: relative;
 				}
 			</style>
-
 		</div>
 	</div>
 </div>

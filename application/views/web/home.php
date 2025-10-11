@@ -506,160 +506,246 @@
 
 
 
-
-
-
-
-
 <div class="nft_grid_style__one bg-body section_gap_y_top__3 overflow-hidden">
 	<div class="container">
 		<div class="row">
-<div class="col-lg-9">
-    <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="nft_tab_1" role="tabpanel" aria-labelledby="nft_pill_1">
-            <div class="row">
-                <?php foreach ($novel as $data_novel): ?>
-                    <?php
-                    $chapter = $this->db->where('novel_id', $data_novel->novel_id)->get('novel_chapter')->result();
-                    ?>
-                    <div class="col-lg-3 col-md-3 col-sm-12" style="margin-bottom: 20px;">
-                        <!-- Card Container -->
-                        <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px; background: #ffffff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); height: 100%; transition: all 0.3s ease; border: 1px solid #e2e8f0;"
-                            onmouseover="this.style.boxShadow='0 8px 24px rgba(0, 0, 0, 0.12)'; this.style.transform='translateY(-4px)'; this.style.borderColor='#667eea';"
-                            onmouseout="this.style.boxShadow='0 2px 8px rgba(0, 0, 0, 0.08)'; this.style.transform='translateY(0)'; this.style.borderColor='#e2e8f0';">
+			<div class="col-lg-9">
+				<div class="tab-content" id="pills-tabContent">
+					<div class="tab-pane fade show active" id="nft_tab_1" role="tabpanel" aria-labelledby="nft_pill_1">
+						<div class="row">
+							<?php foreach ($novel as $data_novel): ?>
+								<?php
+								$chapter = $this->db->where('novel_id', $data_novel->novel_id)->get('novel_chapter')->result();
+								?>
+								<div class="col-lg-3 col-md-3 col-sm-12" style="margin-bottom: 20px;">
+									<!-- Card Container -->
+									<div class="novel-card"
+										style="display: flex; flex-direction: column; gap: 10px; padding: 14px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); height: 100%; transition: all 0.3s ease; border: 1px solid #e2e8f0;"
+										onmouseover="this.style.transform='translateY(-4px)';"
+										onmouseout="this.style.transform='translateY(0)';">
 
-                            <!-- Thumbnail -->
-                            <a href="<?= base_url() ?>web/detail/<?= encrypt_url($data_novel->novel_id) ?>"
-                                style="width: 100%; overflow: hidden; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); display: block;">
-                                <img style="width: 100%; height: 200px; object-fit: cover; display: block; transition: transform 0.4s ease;"
-                                    src="<?= !empty($data_novel->thumbnail)
-                                                ? base_url() . 'template/assets/img/novel/' . $data_novel->thumbnail
-                                                : base_url() . 'template/default.png' ?>"
-                                    alt="<?= htmlspecialchars($data_novel->title) ?>"
-                                    onmouseover="this.style.transform='scale(1.08)';"
-                                    onmouseout="this.style.transform='scale(1)';">
-                            </a>
+										<!-- Thumbnail -->
+										<a href="<?= base_url() ?>web/detail/<?= encrypt_url($data_novel->novel_id) ?>"
+											style="width: 100%; overflow: hidden; border-radius: 10px; display: block;">
+											<img style="width: 100%; height: 200px; object-fit: cover; display: block; transition: transform 0.4s ease;"
+												src="<?= !empty($data_novel->thumbnail)
+															? base_url() . 'template/assets/img/novel/' . $data_novel->thumbnail
+															: base_url() . 'template/default.png' ?>"
+												alt="<?= htmlspecialchars($data_novel->title) ?>"
+												onmouseover="this.style.transform='scale(1.08)';"
+												onmouseout="this.style.transform='scale(1)';">
+										</a>
 
-                            <!-- Content Area -->
-                            <div style="display: flex; flex-direction: column; min-width: 0;">
-                                <!-- Title -->
-                                <h5 style="margin: 0 0 8px 0; font-size: 13px; font-weight: 700; line-height: 1.3; height: auto; min-height: 34px;">
-                                    <a href="<?= base_url() ?>web/detail/<?= encrypt_url($data_novel->novel_id) ?>"
-                                        style="color: #1a202c; text-decoration: none; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; transition: color 0.3s ease;"
-                                        onmouseover="this.style.color='#667eea';"
-                                        onmouseout="this.style.color='#1a202c';">
-                                        <?= $data_novel->title ?>
-                                    </a>
-                                </h5>
+										<!-- Content Area -->
+										<div style="display: flex; flex-direction: column; min-width: 0;">
+											<!-- Title -->
+											<h5 style="margin: 0 0 8px 0; font-size: 13px; font-weight: 700; line-height: 1.3; height: auto; min-height: 34px;">
+												<a href="<?= base_url() ?>web/detail/<?= encrypt_url($data_novel->novel_id) ?>"
+													class="novel-title-link"
+													style="text-decoration: none; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; transition: color 0.3s ease;">
+													<?= $data_novel->title ?>
+												</a>
+											</h5>
 
-                                <!-- Chapter List -->
-                                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 3px; max-height: 180px; overflow-y: auto;">
-                                    <?php $chapters = $this->db->where('novel_id', $data_novel->novel_id)->order_by('novel_chapter_id', 'desc')->get('novel_chapter', 4)->result(); ?>
-                                    <?php if (count($chapters) > 0) { ?>
-                                        <?php foreach ($chapters as $chapter) : ?>
-                                            <li style="display: flex; align-items: center; gap: 6px; padding: 6px 8px; border-radius: 6px; background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%); border-left: 2px solid transparent; transition: all 0.2s ease;"
-                                                onmouseover="this.style.background='linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%)'; this.style.borderLeft='2px solid #667eea'; this.style.paddingLeft='12px';"
-                                                onmouseout="this.style.background='linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%)'; this.style.borderLeft='2px solid transparent'; this.style.paddingLeft='8px';">
+											<!-- Chapter List -->
+											<ul class="chapter-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 3px; max-height: 180px; overflow-y: auto;">
+												<?php $chapters = $this->db->where('novel_id', $data_novel->novel_id)->order_by('novel_chapter_id', 'desc')->get('novel_chapter', 4)->result(); ?>
+												<?php if (count($chapters) > 0) { ?>
+													<?php foreach ($chapters as $chapter) : ?>
+														<li class="chapter-item"
+															style="display: flex; align-items: center; gap: 6px; padding: 6px 8px; border-radius: 6px; border-left: 2px solid transparent; transition: all 0.2s ease;">
 
-                                                <!-- Chapter Link -->
-                                                <a href="<?= base_url() ?>web/read/<?= encrypt_url($chapter->novel_chapter_id) ?>"
-                                                    style="color: #4a5568; text-decoration: none; font-size: 11px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 0 0 auto; max-width: 50%;"
-                                                    onmouseover="this.style.color='#667eea'; this.style.textDecoration='underline';"
-                                                    onmouseout="this.style.color='#4a5568'; this.style.textDecoration='none';">
-                                                    <?= $chapter->kode_chapter ?>
-                                                </a>
+															<!-- Chapter Link -->
+															<a href="<?= base_url() ?>web/read/<?= encrypt_url($chapter->novel_chapter_id) ?>"
+																class="chapter-link"
+																style="text-decoration: none; font-size: 11px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 0 0 auto; max-width: 50%;">
+																<?= $chapter->kode_chapter ?>
+															</a>
 
-                                                <!-- Badge New -->
-                                                <?php
-                                                $date = date('Y-m-d', strtotime('-5 days', strtotime(date('Y-m-d H:i:s'))));
-                                                if ($chapter->created_at >= $date) {
-                                                ?>
-                                                    <span style="padding: 1px 4px; font-size: 7px; font-weight: 700; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.5px; background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%); color: #fff; box-shadow: 0 1px 4px rgba(192, 108, 132, 0.4);">
-                                                        NEW
-                                                    </span>
-                                                <?php } ?>
+															<!-- Badge New -->
+															<?php
+															$date = date('Y-m-d', strtotime('-5 days', strtotime(date('Y-m-d H:i:s'))));
+															if ($chapter->created_at >= $date) {
+															?>
+																<span class="new-badge"
+																	style="padding: 1px 4px; font-size: 7px; font-weight: 700; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.5px; color: #fff; box-shadow: 0 1px 4px rgba(192, 108, 132, 0.4);">
+																	NEW
+																</span>
+															<?php } ?>
 
-                                                <!-- Time -->
-                                                <span style="color: #a0aec0; font-size: 10px; margin-left: auto; white-space: nowrap; font-weight: 500;">
-                                                    <?= time_elapsed_string($chapter->created_at) ?>
-                                                </span>
-                                            </li>
-                                        <?php endforeach; ?>
-                                    <?php } else { ?>
-                                        <li style="display: flex; align-items: center; padding: 8px; border-radius: 6px; background: #f8f9fa; border: 1px dashed #dee2e6;">
-                                            <span style="color: #adb5bd; font-style: italic; font-size: 11px; text-align: center; width: 100%;">
-                                                📚 Belum ada chapter tersedia
-                                            </span>
-                                        </li>
-                                    <?php } ?>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
+															<!-- Time -->
+															<span class="chapter-time"
+																style="font-size: 10px; margin-left: auto; white-space: nowrap; font-weight: 500;">
+																<?= time_elapsed_string($chapter->created_at) ?>
+															</span>
+														</li>
+													<?php endforeach; ?>
+												<?php } else { ?>
+													<li class="empty-chapter"
+														style="display: flex; align-items: center; padding: 8px; border-radius: 6px; border: 1px dashed;">
+														<span style="font-style: italic; font-size: 11px; text-align: center; width: 100%;">
+															📚 Belum ada chapter tersedia
+														</span>
+													</li>
+												<?php } ?>
+											</ul>
+										</div>
+									</div>
+								</div>
+							<?php endforeach; ?>
+						</div>
+					</div>
 
-        <div class="more-load-wrap text-center mt-50">
-            <a href="<?= base_url() ?>web/daftar_novel" class="load-more-btn">
-                <svg width="18" height="19" fill="none" viewBox="0 0 18 19"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M11.775 3.61794C11.0224 3.39694 10.192 3.25244 9.27502 3.25244C5.13143 3.25244 1.77502 6.55046 1.77502 10.622C1.77502 14.702 5.13143 18 9.27502 18C13.4186 18 16.775 14.702 16.775 10.6305C16.775 9.11747 16.3079 7.70646 15.512 6.53346"
-                        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M12.848 3.82201L10.348 1" stroke-width="1.8" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                    <path d="M12.8478 3.82202L9.93256 5.91303" stroke-width="1.8" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                </svg>
-                View all items
-            </a>
-        </div>
-    </div>
-</div>
+					<div class="more-load-wrap text-center mt-50">
+						<a href="<?= base_url() ?>web/daftar_novel" class="load-more-btn">
+							<svg width="18" height="19" fill="none" viewBox="0 0 18 19"
+								xmlns="http://www.w3.org/2000/svg">
+								<path
+									d="M11.775 3.61794C11.0224 3.39694 10.192 3.25244 9.27502 3.25244C5.13143 3.25244 1.77502 6.55046 1.77502 10.622C1.77502 14.702 5.13143 18 9.27502 18C13.4186 18 16.775 14.702 16.775 10.6305C16.775 9.11747 16.3079 7.70646 15.512 6.53346"
+									stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+								<path d="M12.848 3.82201L10.348 1" stroke-width="1.8" stroke-linecap="round"
+									stroke-linejoin="round" />
+								<path d="M12.8478 3.82202L9.93256 5.91303" stroke-width="1.8" stroke-linecap="round"
+									stroke-linejoin="round" />
+							</svg>
+							View all items
+						</a>
+					</div>
+				</div>
+			</div>
 
-			<!-- Optional: Responsive CSS for better mobile experience -->
 			<style>
-				@media (max-width: 991px) {
-					.col-lg-6 {
-						flex: 0 0 100%;
-						max-width: 100%;
-					}
+				/* Variabel CSS untuk Mode Terang */
+				.theme-light-active {
+					--card-bg: #ffffff;
+					--card-border: #e2e8f0;
+					--card-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+					--card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
+					--title-color: #1a202c;
+					--title-hover: #667eea;
+					--chapter-bg: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
+					--chapter-bg-hover: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+					--chapter-border-hover: #667eea;
+					--chapter-link: #4a5568;
+					--chapter-link-hover: #667eea;
+					--chapter-time: #a0aec0;
+					--empty-chapter-bg: #f8f9fa;
+					--empty-chapter-border: #dee2e6;
+					--empty-chapter-text: #adb5bd;
+					--new-badge-bg: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);
 				}
 
-				@media (max-width: 575px) {
-					.col-lg-6>div {
-						gap: 12px !important;
-						padding: 16px !important;
-					}
+				/* Variabel CSS untuk Mode Gelap */
+				.theme-dark-active {
+					--card-bg: #1e1e2e;
+					--card-border: #313244;
+					--card-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+					--card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.5);
+					--title-color: #cdd6f4;
+					--title-hover: #89b4fa;
+					--chapter-bg: linear-gradient(135deg, #313244 0%, #45475a 100%);
+					--chapter-bg-hover: linear-gradient(135deg, #45475a 0%, #585b70 100%);
+					--chapter-border-hover: #89b4fa;
+					--chapter-link: #cdd6f4;
+					--chapter-link-hover: #89b4fa;
+					--chapter-time: #a6adc8;
+					--empty-chapter-bg: #313244;
+					--empty-chapter-border: #45475a;
+					--empty-chapter-text: #a6adc8;
+					--new-badge-bg: linear-gradient(135deg, #f5c2e7 0%, #cba6f7 100%);
+				}
 
-					.col-lg-6 img {
-						height: 160px !important;
-						width: 115px !important;
-					}
+				/* Styling untuk Card */
+				.novel-card {
+					background: var(--card-bg) !important;
+					border-color: var(--card-border) !important;
+					box-shadow: var(--card-shadow) !important;
+				}
 
-					.col-lg-6 h5 {
-						font-size: 14px !important;
-						min-height: 38px !important;
-					}
+				.theme-light-active .novel-card:hover {
+					box-shadow: var(--card-shadow-hover) !important;
+					border-color: var(--chapter-border-hover) !important;
+				}
 
-					.col-lg-6 li {
-						padding: 8px 10px !important;
-						flex-wrap: wrap;
-					}
+				.theme-dark-active .novel-card:hover {
+					box-shadow: var(--card-shadow-hover) !important;
+					border-color: var(--chapter-border-hover) !important;
+				}
 
-					.col-lg-6 li a {
-						font-size: 11px !important;
-						max-width: 100% !important;
-					}
+				/* Styling untuk Title */
+				.novel-title-link {
+					color: var(--title-color) !important;
+				}
 
-					.col-lg-6 li span:last-child {
-						margin-left: 0 !important;
-						flex-basis: 100%;
-						font-size: 10px !important;
-					}
+				.novel-title-link:hover {
+					color: var(--title-hover) !important;
+				}
+
+				/* Styling untuk Chapter List */
+				.chapter-item {
+					background: var(--chapter-bg) !important;
+				}
+
+				.chapter-item:hover {
+					background: var(--chapter-bg-hover) !important;
+					border-left-color: var(--chapter-border-hover) !important;
+					padding-left: 12px !important;
+				}
+
+				/* Styling untuk Chapter Link */
+				.chapter-link {
+					color: var(--chapter-link) !important;
+				}
+
+				.chapter-link:hover {
+					color: var(--chapter-link-hover) !important;
+					text-decoration: underline !important;
+				}
+
+				/* Styling untuk Waktu Chapter */
+				.chapter-time {
+					color: var(--chapter-time) !important;
+				}
+
+				/* Styling untuk Empty Chapter */
+				.empty-chapter {
+					background: var(--empty-chapter-bg) !important;
+					border-color: var(--empty-chapter-border) !important;
+				}
+
+				.empty-chapter span {
+					color: var(--empty-chapter-text) !important;
+				}
+
+				/* Styling untuk New Badge */
+				.new-badge {
+					background: var(--new-badge-bg) !important;
+				}
+
+				/* Scrollbar styling */
+				.chapter-list::-webkit-scrollbar {
+					width: 4px;
+				}
+
+				.chapter-list::-webkit-scrollbar-track {
+					background: transparent;
+				}
+
+				.theme-light-active .chapter-list::-webkit-scrollbar-thumb {
+					background: #cbd5e0;
+					border-radius: 2px;
+				}
+
+				.theme-dark-active .chapter-list::-webkit-scrollbar-thumb {
+					background: #585b70;
+					border-radius: 2px;
+				}
+
+				.chapter-list::-webkit-scrollbar-thumb:hover {
+					background: #667eea;
 				}
 			</style>
+
 			<div class="col-lg-3">
 				<div class="accordion-item sidebar_status__filter sidebar__filter ">
 					<h2 class="accordion-header sidebar__header" id="filterHeadingOne">

@@ -1,317 +1,629 @@
 <div class="author_profiler__wrapper bg-body-2 section_gap_y_bottom__1 profile-section">
-	<div class="author_profile__cover"></div>
-	<div class="container">
+    <div class="author_profile__cover"></div>
+    <div class="container">
 
-		<div class="author_profiler__details">
-			<div class="ap__header d-flex align-items-center justify-content-between flex-wrap gap-3">
-				<div class="author_image">
-					<img src="https://xsgames.co/randomusers/avatar.php?g=pixel" alt="" style="border-radius: 50%;">
-				</div>
-			</div>
-		</div>
+        <div class="author_profiler__details">
+            <div class="ap__header d-flex align-items-center justify-content-between flex-wrap gap-3">
+                <div class="author_image">
+                    <img src="https://xsgames.co/randomusers/avatar.php?g=pixel" alt="" style="border-radius: 50%;">
+                </div>
+            </div>
+        </div>
 
-		<div class="row pt-40 gy-4">
-			<div class="col-lg-3">
-				<div class="author_detail__info">
+        <div class="row pt-40 gy-4">
+            <div class="col-lg-3">
+                <div class="author_detail__info profile-card">
 
-					<h3 class="author__name"><?= $user->nama ?></h3>
-					<h6 class="author__username"><?= $user->email ?></h6>
+                    <h3 class="author__name"><?= $user->nama ?></h3>
+                    <h6 class="author__username"><?= $user->email ?></h6>
 
-					<div class="followers__wrap">
-						<div class="single__flw">
-							<h5>Saldo User</h5>
-							<span>Rp. <?= number_format($user->saldo_akun, 0, '.', '.') ?></span> <br>
+                    <div class="followers__wrap">
+                        <div class="single__flw">
+                            <h5>Saldo User</h5>
+                            <span class="saldo-amount">Rp. <?= number_format($user->saldo_akun, 0, '.', '.') ?></span> <br>
 
-							<a type="button" data-bs-toggle="modal" href="#exampleModal" role="button" class="submit-v2 mt-20">
-								Deposit
-							</a>
-						</div>
-					</div>
+                            <a type="button" data-bs-toggle="modal" href="#exampleModal" role="button" class="submit-v2 mt-20 deposit-btn">
+                                Deposit
+                            </a>
+                        </div>
+                    </div>
 
-					<div class="join__date">
-						<strong>Bergabung</strong>
-						<span><?= date('d M Y', strtotime($user->created_at)) ?></span>
-					</div>
+                    <div class="join__date">
+                        <strong>Bergabung</strong>
+                        <span><?= date('d M Y', strtotime($user->created_at)) ?></span>
+                    </div>
 
-				</div>
-			</div>
+                </div>
+            </div>
 
-			<div class="col-lg-9">
-				<div class="nft_grid__header row mb-40">
-					<div class="col-lg-12">
-						<ul class="nav nav-pills pills-default" id="pills-tab" role="tablist">
-							<li class="nav-item" role="presentation">
-								<button class="nav-link active" id="pills-tab-one" data-bs-toggle="pill" data-bs-target="#pills-one" type="button" role="tab" aria-controls="pills-one" aria-selected="true">Deposit</button>
-							</li>
-							<li class="nav-item" role="presentation">
-								<button class="nav-link" id="pills-tab-two" data-bs-toggle="pill" data-bs-target="#pills-two" type="button" role="tab" aria-controls="pills-two" aria-selected="false">Mutasi</button>
-							</li>
-							<li class="nav-item" role="presentation">
-								<button class="nav-link" id="pills-tab-three" data-bs-toggle="pill" data-bs-target="#pills-three" type="button" role="tab" aria-controls="pills-three" aria-selected="false">Riwayat Pembelian Chapter</button>
-							</li>
-						</ul>
-					</div>
-				</div>
+            <div class="col-lg-9">
+                <div class="nft_grid__header row mb-40">
+                    <div class="col-lg-12">
+                        <ul class="nav nav-pills pills-default profile-tabs" id="pills-tab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="pills-tab-one" data-bs-toggle="pill" data-bs-target="#pills-one" type="button" role="tab" aria-controls="pills-one" aria-selected="true">Deposit</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pills-tab-two" data-bs-toggle="pill" data-bs-target="#pills-two" type="button" role="tab" aria-controls="pills-two" aria-selected="false">Mutasi</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pills-tab-three" data-bs-toggle="pill" data-bs-target="#pills-three" type="button" role="tab" aria-controls="pills-three" aria-selected="false">Riwayat Pembelian Chapter</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
-				<div class="tab-content" id="pills-tabContent">
-					<div class="tab-pane fade show active" id="pills-one" role="tabpanel" aria-labelledby="pills-tab-one">
-						<div class="row">
-						<div class="table-responsive">
-								<table class="table table-dark table-hover table-sm" id="DataTables">
-									<thead>
-										<tr>
-											<th scope="col">#</th>
-											<th scope="col">Deposit Reference</th>
-											<th scope="col">Nominal</th>
-											<th scope="col">Metode Pembayaran</th>
-											<th scope="col">Status</th>
-											<th scope="col">Tanggal Kadaluarsa</th>
-											<th scope="col">Tanggal Request</th>
-											<th scope="col">Action</th>
-										</tr>
-									</thead>
-									<tbody>
-										<?php $no = 1; ?>
-										<?php foreach ($deposit as $data) : ?>
-											<tr>
-												<th scope="row"><?= $no++ ?></th>
-												<td><?= $data->deposit_reference ?></td>
-												<td>Rp. <?= number_format($data->nominal, 0, '.', '.') ?></td>
-												<td><?= $data->metode_pembayaran ?></td>
-												<td>
-													<?php if ($data->status == 'pending') { ?>
-														<label class="label label-warning"><?= $data->status ?></label>
-													<?php } elseif ($data->status == 'success') { ?>
-														<label class="label label-success"><?= $data->status ?></label>
-													<?php } elseif ($data->status == 'failed' || $data->status == 'expired') { ?>
-														<label class="label label-danger"><?= $data->status ?></label>
-													<?php } ?>
-												</td>
-												<td><?= date('d M Y H:i:s', strtotime($data->expired_at)) ?></td>
-												<td><?= date('d M Y H:i:s', strtotime($data->created_at)) ?></td>
-												<td><button type="button" class="btn-deposit btn-xs" onclick="bayarTransaksi('<?= $data->token ?>')">Bayar Deposit</button></td>
-											</tr>
-										<?php endforeach; ?>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-					<div class="tab-pane fade" id="pills-two" role="tabpanel" aria-labelledby="pills-tab-two">
-						<div class="row">
-						<div class="table-responsive">
-							<table class="table table-dark table-hover" id="DataTables2">
-								<thead>
-									<tr>
-										<th scope="col">#</th>
-										<th scope="col">Nominal</th>
-										<th scope="col">Saldo</th>
-										<th scope="col">Type</th>
-										<th scope="col">Catatan</th>
-										<th scope="col">Tanggal</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php $no = 1; ?>
-									<?php foreach ($mutasi as $data_mutasi) : ?>
-										<tr>
-											<th scope="row"><?= $no++ ?></th>
-											<td>Rp. <?= number_format($data_mutasi->nominal, 0, '.', '.') ?></td>
-											<td>Rp. <?= number_format($data_mutasi->saldo, 0, '.', '.') ?></td>
-											<td>
-												<?php if ($data_mutasi->type == 'credit') { ?>
-													<label class="label label-success">Credit</label>
-												<?php } elseif ($data_mutasi->type == 'debit') { ?>
-													<label class="label label-danger">Debit</label>
-												<?php } ?>
-											</td>
-											<td><?= $data_mutasi->catatan ?></td>
-											<td><?= date('d M Y H:i:s', strtotime($data_mutasi->created_at)) ?></td>
-										</tr>
-									<?php endforeach; ?>
-								</tbody>
-							</table>
-						</div>
-						</div>
-					</div>
-					<div class="tab-pane fade" id="pills-three" role="tabpanel" aria-labelledby="pills-tab-three">
-						<div class="row">
-						<div class="table-responsive">
-							<table class="table table-dark table-hover" id="DataTables3">
-								<thead>
-									<tr>
-										<th scope="col">#</th>
-										<th scope="col">Kode Pembelian</th>
-										<th scope="col">Novel</th>
-										<th scope="col">Novel Chapter</th>
-										<th scope="col">Harga</th>
-										<th scope="col">Tanggal</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php $no = 1; ?>
-									<?php foreach ($pembelian_chapter as $data_pembelian) : ?>
-										<tr>
-											<th scope="row"><?= $no++ ?></th>
-											<td><?= $data_pembelian->kode_pembelian ?></td>
-											<td></td>
-											<td></td>
-											<td>Rp. <?= number_format($data_pembelian->harga, 0, '.', '.') ?></td>
-											<td><?= date('d M Y H:i:s', strtotime($data_pembelian->tanggal_pembelian)) ?></td>
-										</tr>
-									<?php endforeach; ?>
-								</tbody>
-							</table>
-						</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-one" role="tabpanel" aria-labelledby="pills-tab-one">
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-sm " id="DataTables" style="font-size: 11px;">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Deposit Reference</th>
+                                            <th scope="col">Nominal</th>
+                                            <th scope="col">Metode Pembayaran</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Tanggal Kadaluarsa</th>
+                                            <th scope="col">Tanggal Request</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $no = 1; ?>
+                                        <?php foreach ($deposit as $data) : ?>
+                                            <tr>
+                                                <th scope="row"><?= $no++ ?></th>
+                                                <td><?= $data->deposit_reference ?></td>
+                                                <td>Rp. <?= number_format($data->nominal, 0, '.', '.') ?></td>
+                                                <td><?= $data->metode_pembayaran ?></td>
+                                                <td>
+                                                    <?php if ($data->status == 'pending') { ?>
+                                                        <span class="status-badge status-pending"><?= $data->status ?></span>
+                                                    <?php } elseif ($data->status == 'success') { ?>
+                                                        <span class="status-badge status-success"><?= $data->status ?></span>
+                                                    <?php } elseif ($data->status == 'failed' || $data->status == 'expired') { ?>
+                                                        <span class="status-badge status-failed"><?= $data->status ?></span>
+                                                    <?php } ?>
+                                                </td>
+                                                <td><?= date('d M Y H:i:s', strtotime($data->expired_at)) ?></td>
+                                                <td><?= date('d M Y H:i:s', strtotime($data->created_at)) ?></td>
+                                                <td>
+                                                    <button type="button" class="btn-pay" onclick="bayarTransaksi('<?= $data->token ?>')">
+                                                        Bayar Deposit
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-two" role="tabpanel" aria-labelledby="pills-tab-two">
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-sm" id="DataTables2" style="font-size: 11px;">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Nominal</th>
+                                            <th scope="col">Saldo</th>
+                                            <th scope="col">Type</th>
+                                            <th scope="col">Catatan</th>
+                                            <th scope="col">Tanggal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $no = 1; ?>
+                                        <?php foreach ($mutasi as $data_mutasi) : ?>
+                                            <tr>
+                                                <th scope="row"><?= $no++ ?></th>
+                                                <td>Rp. <?= number_format($data_mutasi->nominal, 0, '.', '.') ?></td>
+                                                <td>Rp. <?= number_format($data_mutasi->saldo, 0, '.', '.') ?></td>
+                                                <td>
+                                                    <?php if ($data_mutasi->type == 'credit') { ?>
+                                                        <span class="status-badge status-credit">Credit</span>
+                                                    <?php } elseif ($data_mutasi->type == 'debit') { ?>
+                                                        <span class="status-badge status-debit">Debit</span>
+                                                    <?php } ?>
+                                                </td>
+                                                <td><?= $data_mutasi->catatan ?></td>
+                                                <td><?= date('d M Y H:i:s', strtotime($data_mutasi->created_at)) ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-three" role="tabpanel" aria-labelledby="pills-tab-three">
+                        <div class="table-container">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-sm" id="DataTables3" style="font-size: 11px;">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Kode Pembelian</th>
+                                            <th scope="col">Novel</th>
+                                            <th scope="col">Novel Chapter</th>
+                                            <th scope="col">Harga</th>
+                                            <th scope="col">Tanggal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $no = 1; ?>
+                                        <?php foreach ($pembelian_chapter as $data_pembelian) : ?>
+                                            <tr>
+                                                <th scope="row"><?= $no++ ?></th>
+                                                <td><?= $data_pembelian->kode_pembelian ?></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>Rp. <?= number_format($data_pembelian->harga, 0, '.', '.') ?></td>
+                                                <td><?= date('d M Y H:i:s', strtotime($data_pembelian->tanggal_pembelian)) ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Deposit</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<form id="form-deposit" action="<?= base_url() ?>user_profile/deposit" method="post">
-					<div class="form-group">
-						<input type="text" name="nominal" class="form-control" id="nominal" placeholder="Masukkan Nominal">
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-				<button type="button" id="btn-submit" class="btn btn-primary">Submit</button>
-			</div>
-		</div>
-	</div>
+    <div class="modal-dialog">
+        <div class="modal-content theme-modal">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Deposit</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form-deposit" action="<?= base_url() ?>user_profile/deposit" method="post">
+                    <div class="form-group">
+                        <input type="text" name="nominal" class="form-control theme-input" id="nominal" placeholder="Masukkan Nominal">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="btn-submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
 </div>
 
+<style>
+/* Variabel CSS untuk Mode Terang dan Gelap */
+.theme-light-active {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-card: #ffffff;
+    --text-primary: #1a202c;
+    --text-secondary: #4a5568;
+    --text-muted: #718096;
+    --border-color: #e2e8f0;
+    --table-header: #f7fafc;
+    --table-border: #e2e8f0;
+    --table-hover: #f7fafc;
+    --modal-bg: #ffffff;
+    --input-bg: #ffffff;
+    --input-border: #e2e8f0;
+    --input-text: #1a202c;
+}
+
+.theme-dark-active {
+    --bg-primary: #1a202c;
+    --bg-secondary: #2d3748;
+    --bg-card: #2d3748;
+    --text-primary: #f7fafc;
+    --text-secondary: #e2e8f0;
+    --text-muted: #a0aec0;
+    --border-color: #4a5568;
+    --table-header: #2d3748;
+    --table-border: #4a5568;
+    --table-hover: #2d3748;
+    --modal-bg: #2d3748;
+    --input-bg: #2d3748;
+    --input-border: #4a5568;
+    --input-text: #f7fafc;
+}
+
+/* Styling Umum */
+.profile-section {
+    background: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+.profile-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.author__name {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.author__username {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.saldo-amount {
+    color: #10b981;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.deposit-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.deposit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.join__date {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.join__date strong {
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.join__date span {
+    color: var(--text-secondary);
+}
+
+/* Tabs Styling */
+.profile-tabs .nav-link {
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    margin-right: 8px;
+    border-radius: 8px;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+}
+
+.profile-tabs .nav-link.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: #667eea;
+}
+
+.profile-tabs .nav-link:hover:not(.active) {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+/* Table Styling */
+.table-container {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.table {
+    margin-bottom: 0;
+    color: var(--text-primary);
+    background: var(--bg-card);
+}
+
+.table thead th {
+    background: var(--table-header);
+    border-bottom: 2px solid var(--table-border);
+    color: var(--text-primary);
+    font-weight: 600;
+    padding: 16px 12px;
+}
+
+.table tbody td {
+    padding: 12px;
+    border-bottom: 1px solid var(--table-border);
+    vertical-align: middle;
+}
+
+.table tbody tr:hover {
+    background: var(--table-hover);
+}
+
+/* Status Badges */
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.status-success {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.status-failed {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.status-credit {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.status-debit {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.theme-dark-active .status-pending {
+    background: #451a03;
+    color: #fbbf24;
+}
+
+.theme-dark-active .status-success {
+    background: #064e3b;
+    color: #34d399;
+}
+
+.theme-dark-active .status-failed {
+    background: #7f1d1d;
+    color: #f87171;
+}
+
+.theme-dark-active .status-credit {
+    background: #064e3b;
+    color: #34d399;
+}
+
+.theme-dark-active .status-debit {
+    background: #7f1d1d;
+    color: #f87171;
+}
+
+/* Button Pay */
+.btn-pay {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-pay:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
+}
+
+/* Modal Styling */
+.theme-modal .modal-content {
+    background: var(--modal-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.theme-modal .modal-header {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.theme-modal .modal-footer {
+    border-top: 1px solid var(--border-color);
+}
+
+.theme-input {
+    background: var(--input-bg) !important;
+    border: 1px solid var(--input-border) !important;
+    color: var(--input-text) !important;
+    padding: 12px;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.theme-input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    outline: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-card {
+        padding: 16px;
+    }
+    
+    .author__name {
+        font-size: 1.25rem;
+    }
+    
+    .profile-tabs .nav-link {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .table-responsive {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .profile-tabs .nav-link {
+        display: block;
+        margin-bottom: 8px;
+        margin-right: 0;
+    }
+    
+    .author_image img {
+        width: 80px;
+        height: 80px;
+    }
+}
+</style>
+
 <?php 
-	if ($this->fungsi->sett_website()->midtrans_transaction_mode == 'development') {
-		$endpoint = $this->fungsi->sett_website()->midtrans_sandbox_url.'/snap.js'; 
-	} else {
-		$endpoint = $this->fungsi->sett_website()->midtrans_production_url.'/snap.js';
-	}
+    if ($this->fungsi->sett_website()->midtrans_transaction_mode == 'development') {
+        $endpoint = $this->fungsi->sett_website()->midtrans_sandbox_url.'/snap.js'; 
+    } else {
+        $endpoint = $this->fungsi->sett_website()->midtrans_production_url.'/snap.js';
+    }
 ?>
 
 <script type="text/javascript" src="<?= $endpoint ?>" data-client-key="<?= $this->fungsi->sett_website()->midtrans_client_key ?>"></script>
 
 <script>
-	$(document).ready(function() {
-		$('#DataTables').DataTable();
-		$('#DataTables2').DataTable();
-		$('#DataTables3').DataTable();
-	});
-	$('#btn-submit').click(function() {
-		$('.btn-close').trigger('click');
-		// let mymodal = document.getElementById('exampleModal');
+    $(document).ready(function() {
+        $('#DataTables, #DataTables2, #DataTables3').DataTable({
+            "pageLength": 10,
+            "language": {
+                "search": "Cari:",
+                "lengthMenu": "Tampilkan _MENU_ data",
+                "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                "paginate": {
+                    "previous": "‹",
+                    "next": "›"
+                }
+            }
+        });
+    });
 
-		// const modal = new bootstrap.Modal(mymodal);
+    $('#btn-submit').click(function() {
+        $('.btn-close').trigger('click');
+        let nominal = $('#nominal').val();
+        let base_url = <?php echo "'" . site_url('/') . "'" ?>;
+        
+        if (!nominal || nominal <= 0) {
+            Swal.fire({
+                toast: true,
+                title: 'Error!',
+                text: 'Masukkan nominal yang valid',
+                icon: "error",
+                animation: true,
+                timer: 4000,
+                timerProgressBar: true,
+            });
+            return;
+        }
 
-		// mymodal.hide()
+        $.ajax({
+            type: 'post',
+            url: `${base_url}user_profile/deposit`,
+            data: {
+                nominal: nominal
+            },
+            success: function(result) {
+                let res = JSON.parse(result);
+                if (res.success) {
+                    snap.pay(res.token, {
+                        onSuccess: function(result) {
+                            location.reload();
+                        },
+                        onPending: function(result) {
+                            console.log('pending');
+                            console.log(result);
+                        },
+                        onError: function(result) {
+                            Swal.fire({
+                                toast: true,
+                                title: 'Error!',
+                                text: `Gagal melakukan permintaan deposit`,
+                                icon: "error",
+                                animation: true,
+                                timer: 4000,
+                                timerProgressBar: true,
+                            });
+                        },
+                        onClose: function() {
+                            Swal.fire({
+                                toast: true,
+                                title: 'Info!',
+                                text: `Pembayaran dibatalkan`,
+                                icon: "info",
+                                animation: true,
+                                timer: 4000,
+                                timerProgressBar: true,
+                            });
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        toast: true,
+                        title: 'Error!',
+                        text: res.message,
+                        icon: "error",
+                        animation: true,
+                        timer: 4000,
+                        timerProgressBar: true,
+                    });
+                }
+            }
+        });
+    });
 
-		snap.show();
-		let nominal = $('#nominal').val();
-		let base_url = <?php echo "'" . site_url('/') . "'" ?>;
-		$.ajax({
-			type: 'post',
-			url: `${base_url}user_profile/deposit`,
-			data: {
-				nominal: nominal
-			},
-			success: function(result) {
-				let res = JSON.parse(result);
-				if (res.success) {
-					snap.hide();
-					snap.pay(res.token, {
-						onSuccess: function(result) {
-							console.log('success');
-							console.log(result);
-						},
-						onPending: function(result) {
-							console.log('pending');
-							console.log(result);
-						},
-						onError: function(result) {
-							Swal.fire({
-								toast: true,
-								title: 'Error!',
-								text: `Gagal melakukan permintaan deposit`,
-								type: "error",
-								animation: true,
-								timer: 4000,
-								timerProgressBar: true,
-							});
-						},
-						onClose: function() {
-							Swal.fire({
-								toast: true,
-								title: 'Error!',
-								text: `Gagal melakukan permintaan deposit`,
-								type: "error",
-								animation: true,
-								timer: 4000,
-								timerProgressBar: true,
-							});
-						}
-					});
-				} else {
-					snap.hide();
-					Swal.fire({
-						toast: true,
-						title: 'Error!',
-						text: res.message,
-						type: "error",
-						animation: true,
-						timer: 4000,
-						timerProgressBar: true,
-					});
-				}
-			}
-		});
-	});
-
-	function bayarTransaksi(token) {
-		snap.hide();
-		snap.pay(token, {
-			onSuccess: function(result) {
-				console.log('success');
-				console.log(result);
-			},
-			onPending: function(result) {
-				console.log('pending');
-				console.log(result);
-			},
-			onError: function(result) {
-				Swal.fire({
-					toast: true,
-					title: 'Error!',
-					text: `Gagal melakukan permintaan deposit`,
-					type: "error",
-					animation: true,
-					timer: 4000,
-					timerProgressBar: true,
-				});
-			},
-			onClose: function() {
-				Swal.fire({
-					toast: true,
-					title: 'Error!',
-					text: `Gagal melakukan permintaan deposit`,
-					type: "error",
-					animation: true,
-					timer: 4000,
-					timerProgressBar: true,
-				});
-			}
-		});
-	}
+    function bayarTransaksi(token) {
+        snap.pay(token, {
+            onSuccess: function(result) {
+                location.reload();
+            },
+            onPending: function(result) {
+                console.log('pending');
+                console.log(result);
+            },
+            onError: function(result) {
+                Swal.fire({
+                    toast: true,
+                    title: 'Error!',
+                    text: `Gagal melakukan pembayaran`,
+                    icon: "error",
+                    animation: true,
+                    timer: 4000,
+                    timerProgressBar: true,
+                });
+            },
+            onClose: function() {
+                Swal.fire({
+                    toast: true,
+                    title: 'Info!',
+                    text: `Pembayaran dibatalkan`,
+                    icon: "info",
+                    animation: true,
+                    timer: 4000,
+                    timerProgressBar: true,
+                });
+            }
+        });
+    }
 </script>

@@ -1,6 +1,5 @@
 <div class="live_auction_style__one bg-body section_gap_y_top__2">
 	<div class="container">
-		<!-- Novel terbaru -->
 		<div class="new-novel-section">
 			<div class="row pb-30">
 				<div class="col-lg-12 d-flex align-items-center justify-content-between gap-18 flex-wrap flex-lg-nowrap ">
@@ -50,7 +49,7 @@
 								<div class="auction_card__thumb">
 									<a href="<?= base_url() ?>web/detail/<?= encrypt_url($data->novel_id) ?>">
 										<img
-											style="height:180px;"
+											style="height:295px;"
 											src="<?= !empty($data->thumbnail)
 														? base_url() . 'template/assets/img/novel/' . $data->thumbnail
 														: base_url() . 'template/default.png' ?>"
@@ -83,10 +82,8 @@
 				</div>
 			</div>
 		</div>
-		<!-- Novel Terbaru End -->
 
-		<!-- Novel Terpopuler -->
-		<div class="popular-novel-section mt-3">
+		<div class="new-novel-section mt-4">
 			<div class="row pb-30">
 				<div class="col-lg-12 d-flex align-items-center justify-content-between gap-18 flex-wrap flex-lg-nowrap ">
 					<h2 class="section_title__1 fw-bold">
@@ -95,7 +92,7 @@
 					<div class="section__line d-lg-block d-none"></div>
 					<div class="section__actions d-flex gap-4">
 						<div class="slider__navigation d-flex gap-2">
-							<div class="live_auction_two__prev navigation__btn btn__prev">
+							<div class="live_auction_one__prev navigation__btn btn__prev">
 								<svg width="8" height="14" viewBox="0 0 8 14" fill="none"
 									xmlns="http://www.w3.org/2000/svg">
 									<path
@@ -104,7 +101,7 @@
 										stroke-linejoin="round" />
 								</svg>
 							</div>
-							<div class="live_auction_two__next navigation__btn btn__next">
+							<div class="live_auction_one__next navigation__btn btn__next">
 								<svg width="7" fill="none" height="14" viewBox="0 0 7 14"
 									xmlns="http://www.w3.org/2000/svg">
 									<path
@@ -127,34 +124,35 @@
 					</div>
 				</div>
 			</div>
-			<div class="swiper live_auction_slider__two">
+			<div class="swiper live_auction_slider__one">
 				<div class="swiper-wrapper">
-					<?php foreach ($novel_fav as $data_fav) : ?>
+					<?php foreach ($novel_fav as $data) : ?>
 						<div class="swiper-slide">
 							<div class="auction_card_style__one">
 								<div class="auction_card__thumb">
 									<a href="<?= base_url() ?>web/detail/<?= encrypt_url($data->novel_id) ?>">
 										<img
-											style="height:180px;"
+											style="height:295px;;"
 											src="<?= !empty($data->thumbnail)
 														? base_url() . 'template/assets/img/novel/' . $data->thumbnail
 														: base_url() . 'template/default.png' ?>"
 											alt="Thumbnail">
 									</a>
+
 								</div>
 								<div class="nft__info">
 									<span class="nft__title">
-										<a href="<?= base_url() ?>web/detail/<?= encrypt_url($data_fav->novel_id) ?>"><?= strlen($data_fav->title) > 20 ? substr($data_fav->title, 0, 20) . '...' : $data_fav->title ?></a>
+										<a href="<?= base_url() ?>web/detail/<?= encrypt_url($data->novel_id) ?>"><?= strlen($data->title) > 20 ? substr($data->title, 0, 20) . '...' : $data->title ?></a>
 									</span>
 									<div class="current__bid">
-										<?php $last_chapter = $this->db->where('novel_id', $data_fav->novel_id)->order_by('novel_chapter_id', 'desc')->limit(1)->get('novel_chapter')->row(); ?>
+										<?php $last_chapter = $this->db->where('novel_id', $data->novel_id)->order_by('novel_chapter_id', 'desc')->limit(1)->get('novel_chapter')->row(); ?>
 										<span><?= $last_chapter ? $last_chapter->kode_chapter : 'belum ada chapter' ?></span>
 									</div>
 
 									<div class="card_countdown">
 										<i class="fa fa-star" style="color: orange;" aria-hidden="true"></i>
 										<span>
-											<?= $data_fav->rating ?>
+											<?= $data->rating ?>
 										</span>
 									</div>
 								</div>
@@ -167,10 +165,9 @@
 				</div>
 			</div>
 		</div>
-		<!-- Novel Terpopuler End -->
 
-		<!-- Novel Jepang -->
-		<div class="novel-jepang-section mt-3">
+		<!-- jepang -->
+		<div class="new-novel-section mt-4">
 			<div class="row pb-30">
 				<div class="col-lg-12 d-flex align-items-center justify-content-between gap-18 flex-wrap flex-lg-nowrap ">
 					<h2 class="section_title__1 fw-bold">
@@ -179,7 +176,7 @@
 					<div class="section__line d-lg-block d-none"></div>
 					<div class="section__actions d-flex gap-4">
 						<div class="slider__navigation d-flex gap-2">
-							<div class="live_auction_three__prev navigation__btn btn__prev">
+							<div class="live_auction_one__prev navigation__btn btn__prev">
 								<svg width="8" height="14" viewBox="0 0 8 14" fill="none"
 									xmlns="http://www.w3.org/2000/svg">
 									<path
@@ -188,7 +185,7 @@
 										stroke-linejoin="round" />
 								</svg>
 							</div>
-							<div class="live_auction_three__next navigation__btn btn__next">
+							<div class="live_auction_one__next navigation__btn btn__next">
 								<svg width="7" fill="none" height="14" viewBox="0 0 7 14"
 									xmlns="http://www.w3.org/2000/svg">
 									<path
@@ -211,35 +208,116 @@
 					</div>
 				</div>
 			</div>
-			<div class="swiper live_auction_slider__three">
+			<div class="swiper live_auction_slider__one">
 				<div class="swiper-wrapper">
-					<?php foreach ($novel_jepang as $data_jepang) : ?>
+					<?php foreach ($novel_jepang as $data) : ?>
 						<div class="swiper-slide">
 							<div class="auction_card_style__one">
 								<div class="auction_card__thumb">
-
 									<a href="<?= base_url() ?>web/detail/<?= encrypt_url($data->novel_id) ?>">
 										<img
-											style="height:180px;"
+											style="height:295px;;"
 											src="<?= !empty($data->thumbnail)
 														? base_url() . 'template/assets/img/novel/' . $data->thumbnail
 														: base_url() . 'template/default.png' ?>"
 											alt="Thumbnail">
 									</a>
+
 								</div>
 								<div class="nft__info">
 									<span class="nft__title">
-										<a href="<?= base_url() ?>web/detail/<?= encrypt_url($data_jepang->novel_id) ?>"><?= strlen($data_jepang->title) > 20 ? substr($data_jepang->title, 0, 20) . '...' : $data_jepang->title ?></a>
+										<a href="<?= base_url() ?>web/detail/<?= encrypt_url($data->novel_id) ?>"><?= strlen($data->title) > 20 ? substr($data->title, 0, 20) . '...' : $data->title ?></a>
 									</span>
 									<div class="current__bid">
-										<?php $last_chapter = $this->db->where('novel_id', $data_jepang->novel_id)->order_by('novel_chapter_id', 'desc')->limit(1)->get('novel_chapter')->row(); ?>
+										<?php $last_chapter = $this->db->where('novel_id', $data->novel_id)->order_by('novel_chapter_id', 'desc')->limit(1)->get('novel_chapter')->row(); ?>
 										<span><?= $last_chapter ? $last_chapter->kode_chapter : 'belum ada chapter' ?></span>
 									</div>
 
 									<div class="card_countdown">
 										<i class="fa fa-star" style="color: orange;" aria-hidden="true"></i>
 										<span>
-											<?= $data_jepang->rating ?>
+											<?= $data->rating ?>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			</div>
+		</div>
+
+		<!-- korea -->
+		<div class="new-novel-section mt-4">
+			<div class="row pb-30">
+				<div class="col-lg-12 d-flex align-items-center justify-content-between gap-18 flex-wrap flex-lg-nowrap ">
+					<h2 class="section_title__1 fw-bold">
+						<span class="text-nowrap">Novel terjemahan Korea</span>
+					</h2>
+					<div class="section__line d-lg-block d-none"></div>
+					<div class="section__actions d-flex gap-4">
+						<div class="slider__navigation d-flex gap-2">
+							<div class="live_auction_one__prev navigation__btn btn__prev">
+								<svg width="8" height="14" viewBox="0 0 8 14" fill="none"
+									xmlns="http://www.w3.org/2000/svg">
+									<path
+										d="M6.75 13.1677L1.81066 8.22739C1.22734 7.64395 1.22734 6.68924 1.81066 6.1058L6.75 1.16553"
+										stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+										stroke-linejoin="round" />
+								</svg>
+							</div>
+							<div class="live_auction_one__next navigation__btn btn__next">
+								<svg width="7" fill="none" height="14" viewBox="0 0 7 14"
+									xmlns="http://www.w3.org/2000/svg">
+									<path
+										d="M0.75 13.1677L5.68934 8.22739C6.27266 7.64395 6.27266 6.68924 5.68934 6.1058L0.75 1.16553"
+										stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+										stroke-linejoin="round" />
+								</svg>
+							</div>
+						</div>
+						<a href="<?= base_url() ?>web/daftar_novel" class="btn-rounded-v1 varient-2">
+							<span class="text-nowrap">View all</span>
+							<svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+								xmlns="http://www.w3.org/2000/svg">
+								<path d="M1.25 6H11.25" stroke-width="1.2" stroke-linecap="round"
+									stroke-linejoin="round" />
+								<path d="M6.25 1L11.25 6L6.25 11" stroke-width="1.2" stroke-linecap="round"
+									stroke-linejoin="round" />
+							</svg>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="swiper live_auction_slider__one">
+				<div class="swiper-wrapper">
+					<?php foreach ($novel_korea as $data) : ?>
+						<div class="swiper-slide">
+							<div class="auction_card_style__one">
+								<div class="auction_card__thumb">
+									<a href="<?= base_url() ?>web/detail/<?= encrypt_url($data->novel_id) ?>">
+										<img
+											style="height:295px;;"
+											src="<?= !empty($data->thumbnail)
+														? base_url() . 'template/assets/img/novel/' . $data->thumbnail
+														: base_url() . 'template/default.png' ?>"
+											alt="Thumbnail">
+									</a>
+
+								</div>
+								<div class="nft__info">
+									<span class="nft__title">
+										<a href="<?= base_url() ?>web/detail/<?= encrypt_url($data->novel_id) ?>"><?= strlen($data->title) > 20 ? substr($data->title, 0, 20) . '...' : $data->title ?></a>
+									</span>
+									<div class="current__bid">
+										<?php $last_chapter = $this->db->where('novel_id', $data->novel_id)->order_by('novel_chapter_id', 'desc')->limit(1)->get('novel_chapter')->row(); ?>
+										<span><?= $last_chapter ? $last_chapter->kode_chapter : 'belum ada chapter' ?></span>
+									</div>
+
+									<div class="card_countdown">
+										<i class="fa fa-star" style="color: orange;" aria-hidden="true"></i>
+										<span>
+											<?= $data->rating ?>
 										</span>
 									</div>
 								</div>
@@ -252,92 +330,9 @@
 				</div>
 			</div>
 		</div>
-		<!-- Novel Jepang End -->
 
-		<!-- Novel Korea -->
-		<div class="novel-korea-section mt-3">
-			<div class="row pb-30">
-				<div class="col-lg-12 d-flex align-items-center justify-content-between gap-18 flex-wrap flex-lg-nowrap ">
-					<h2 class="section_title__1 fw-bold">
-						<span class="text-nowrap">Novel terjemahan Korea</span>
-					</h2>
-					<div class="section__line d-lg-block d-none"></div>
-					<div class="section__actions d-flex gap-4">
-						<div class="slider__navigation d-flex gap-2">
-							<div class="live_auction_four__prev navigation__btn btn__prev">
-								<svg width="8" height="14" viewBox="0 0 8 14" fill="none"
-									xmlns="http://www.w3.org/2000/svg">
-									<path
-										d="M6.75 13.1677L1.81066 8.22739C1.22734 7.64395 1.22734 6.68924 1.81066 6.1058L6.75 1.16553"
-										stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-										stroke-linejoin="round" />
-								</svg>
-							</div>
-							<div class="live_auction_four__next navigation__btn btn__next">
-								<svg width="7" fill="none" height="14" viewBox="0 0 7 14"
-									xmlns="http://www.w3.org/2000/svg">
-									<path
-										d="M0.75 13.1677L5.68934 8.22739C6.27266 7.64395 6.27266 6.68924 5.68934 6.1058L0.75 1.16553"
-										stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-										stroke-linejoin="round" />
-								</svg>
-							</div>
-						</div>
-						<a href="<?= base_url() ?>web/daftar_novel" class="btn-rounded-v1 varient-2">
-							<span class="text-nowrap">View all</span>
-							<svg width="12" height="12" viewBox="0 0 12 12" fill="none"
-								xmlns="http://www.w3.org/2000/svg">
-								<path d="M1.25 6H11.25" stroke-width="1.2" stroke-linecap="round"
-									stroke-linejoin="round" />
-								<path d="M6.25 1L11.25 6L6.25 11" stroke-width="1.2" stroke-linecap="round"
-									stroke-linejoin="round" />
-							</svg>
-						</a>
-					</div>
-				</div>
-			</div>
-			<div class="swiper live_auction_slider__four">
-				<div class="swiper-wrapper">
-					<?php foreach ($novel_korea as $data_korea) : ?>
-						<div class="swiper-slide">
-							<div class="auction_card_style__one">
-								<div class="auction_card__thumb">
-
-									<a href="<?= base_url() ?>web/detail/<?= encrypt_url($data->novel_id) ?>">
-										<img
-											style="height:180px;"
-											src="<?= !empty($data->thumbnail)
-														? base_url() . 'template/assets/img/novel/' . $data->thumbnail
-														: base_url() . 'template/default.png' ?>"
-											alt="Thumbnail">
-									</a>
-								</div>
-								<div class="nft__info">
-									<span class="nft__title">
-										<a href="<?= base_url() ?>web/detail/<?= encrypt_url($data_korea->novel_id) ?>"><?= strlen($data_korea->title) > 20 ? substr($data_korea->title, 0, 20) . '...' : $data_korea->title ?></a>
-									</span>
-									<div class="current__bid">
-										<?php $last_chapter = $this->db->where('novel_id', $data_korea->novel_id)->order_by('novel_chapter_id', 'desc')->limit(1)->get('novel_chapter')->row(); ?>
-										<span><?= $last_chapter ? $last_chapter->kode_chapter : 'belum ada chapter' ?></span>
-									</div>
-
-									<div class="card_countdown">
-										<i class="fa fa-star" style="color: orange;" aria-hidden="true"></i>
-										<span>
-											<?= $data_korea->rating ?>
-										</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					<?php endforeach; ?>
-				</div>
-			</div>
-		</div>
-		<!-- Novel Korea End -->
-
-		<!-- Novel China -->
-		<div class="novel-china-section mt-3">
+		<!-- China -->
+		<div class="new-novel-section mt-4">
 			<div class="row pb-30">
 				<div class="col-lg-12 d-flex align-items-center justify-content-between gap-18 flex-wrap flex-lg-nowrap ">
 					<h2 class="section_title__1 fw-bold">
@@ -346,7 +341,7 @@
 					<div class="section__line d-lg-block d-none"></div>
 					<div class="section__actions d-flex gap-4">
 						<div class="slider__navigation d-flex gap-2">
-							<div class="live_auction_five__prev navigation__btn btn__prev">
+							<div class="live_auction_one__prev navigation__btn btn__prev">
 								<svg width="8" height="14" viewBox="0 0 8 14" fill="none"
 									xmlns="http://www.w3.org/2000/svg">
 									<path
@@ -355,7 +350,7 @@
 										stroke-linejoin="round" />
 								</svg>
 							</div>
-							<div class="live_auction_five__next navigation__btn btn__next">
+							<div class="live_auction_one__next navigation__btn btn__next">
 								<svg width="7" fill="none" height="14" viewBox="0 0 7 14"
 									xmlns="http://www.w3.org/2000/svg">
 									<path
@@ -378,48 +373,50 @@
 					</div>
 				</div>
 			</div>
-			<div class="swiper live_auction_slider__five">
+			<div class="swiper live_auction_slider__one">
 				<div class="swiper-wrapper">
-					<?php foreach ($novel_china as $data_china) : ?>
+					<?php foreach ($novel_china as $data) : ?>
 						<div class="swiper-slide">
 							<div class="auction_card_style__one">
 								<div class="auction_card__thumb">
-
 									<a href="<?= base_url() ?>web/detail/<?= encrypt_url($data->novel_id) ?>">
 										<img
-											style="height:180px;"
+											style="height:295px;;"
 											src="<?= !empty($data->thumbnail)
 														? base_url() . 'template/assets/img/novel/' . $data->thumbnail
 														: base_url() . 'template/default.png' ?>"
 											alt="Thumbnail">
 									</a>
+
 								</div>
 								<div class="nft__info">
 									<span class="nft__title">
-										<a href="<?= base_url() ?>web/detail/<?= encrypt_url($data_china->novel_id) ?>"><?= strlen($data_china->title) > 20 ? substr($data_china->title, 0, 20) . '...' : $data_china->title ?></a>
+										<a href="<?= base_url() ?>web/detail/<?= encrypt_url($data->novel_id) ?>"><?= strlen($data->title) > 20 ? substr($data->title, 0, 20) . '...' : $data->title ?></a>
 									</span>
 									<div class="current__bid">
-										<?php $last_chapter_china = $this->db->where('novel_id', $data_china->novel_id)->order_by('novel_chapter_id', 'desc')->limit(1)->get('novel_chapter')->row(); ?>
-										<span><?= $last_chapter_china ? $last_chapter_china->kode_chapter : 'belum ada chapter' ?></span>
+										<?php $last_chapter = $this->db->where('novel_id', $data->novel_id)->order_by('novel_chapter_id', 'desc')->limit(1)->get('novel_chapter')->row(); ?>
+										<span><?= $last_chapter ? $last_chapter->kode_chapter : 'belum ada chapter' ?></span>
 									</div>
 
 									<div class="card_countdown">
 										<i class="fa fa-star" style="color: orange;" aria-hidden="true"></i>
 										<span>
-											<?= $data_china->rating ?>
+											<?= $data->rating ?>
 										</span>
 									</div>
 								</div>
+								<!-- <div class="auction_card__bottom">
+								
+							</div> -->
 							</div>
 						</div>
 					<?php endforeach; ?>
 				</div>
 			</div>
 		</div>
-		<!-- Novel China End -->
 
-		<!-- Novel Bahasa Indonesia -->
-		<div class="novel-indo-section mt-3">
+		<!-- Ori indonesia -->
+		<div class="new-novel-section mt-4">
 			<div class="row pb-30">
 				<div class="col-lg-12 d-flex align-items-center justify-content-between gap-18 flex-wrap flex-lg-nowrap ">
 					<h2 class="section_title__1 fw-bold">
@@ -428,7 +425,7 @@
 					<div class="section__line d-lg-block d-none"></div>
 					<div class="section__actions d-flex gap-4">
 						<div class="slider__navigation d-flex gap-2">
-							<div class="live_auction_six__prev navigation__btn btn__prev">
+							<div class="live_auction_one__prev navigation__btn btn__prev">
 								<svg width="8" height="14" viewBox="0 0 8 14" fill="none"
 									xmlns="http://www.w3.org/2000/svg">
 									<path
@@ -437,7 +434,7 @@
 										stroke-linejoin="round" />
 								</svg>
 							</div>
-							<div class="live_auction_six__next navigation__btn btn__next">
+							<div class="live_auction_one__next navigation__btn btn__next">
 								<svg width="7" fill="none" height="14" viewBox="0 0 7 14"
 									xmlns="http://www.w3.org/2000/svg">
 									<path
@@ -460,45 +457,48 @@
 					</div>
 				</div>
 			</div>
-			<div class="swiper live_auction_slider__six">
+			<div class="swiper live_auction_slider__one">
 				<div class="swiper-wrapper">
-					<?php foreach ($novel_ori as $data_ori) : ?>
+					<?php foreach ($novel_ori as $data) : ?>
 						<div class="swiper-slide">
 							<div class="auction_card_style__one">
 								<div class="auction_card__thumb">
-
 									<a href="<?= base_url() ?>web/detail/<?= encrypt_url($data->novel_id) ?>">
 										<img
-											style="height:180px;"
+											style="height:295px;;"
 											src="<?= !empty($data->thumbnail)
 														? base_url() . 'template/assets/img/novel/' . $data->thumbnail
 														: base_url() . 'template/default.png' ?>"
 											alt="Thumbnail">
 									</a>
+
 								</div>
 								<div class="nft__info">
 									<span class="nft__title">
-										<a href="<?= base_url() ?>web/detail/<?= encrypt_url($data_ori->novel_id) ?>"><?= strlen($data_ori->title) > 20 ? substr($data_ori->title, 0, 20) . '...' : $data_ori->title ?></a>
+										<a href="<?= base_url() ?>web/detail/<?= encrypt_url($data->novel_id) ?>"><?= strlen($data->title) > 20 ? substr($data->title, 0, 20) . '...' : $data->title ?></a>
 									</span>
 									<div class="current__bid">
-										<?php $last_chapter = $this->db->where('novel_id', $data_ori->novel_id)->order_by('novel_chapter_id', 'desc')->limit(1)->get('novel_chapter')->row(); ?>
+										<?php $last_chapter = $this->db->where('novel_id', $data->novel_id)->order_by('novel_chapter_id', 'desc')->limit(1)->get('novel_chapter')->row(); ?>
 										<span><?= $last_chapter ? $last_chapter->kode_chapter : 'belum ada chapter' ?></span>
 									</div>
 
 									<div class="card_countdown">
 										<i class="fa fa-star" style="color: orange;" aria-hidden="true"></i>
 										<span>
-											<?= $data_ori->rating ?>
+											<?= $data->rating ?>
 										</span>
 									</div>
 								</div>
+								<!-- <div class="auction_card__bottom">
+								
+							</div> -->
 							</div>
 						</div>
 					<?php endforeach; ?>
 				</div>
 			</div>
 		</div>
-		<!-- Novel Bahasa Indonesia End -->
+
 	</div>
 </div>
 
@@ -548,7 +548,7 @@
 											</h5>
 
 											<!-- Chapter List -->
-											<ul class="chapter-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 3px; max-height: 180px; overflow-y: auto;">
+											<ul class="chapter-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 3px; max-height: 295px;; overflow-y: auto;">
 												<?php $chapters = $this->db->where('novel_id', $data_novel->novel_id)->order_by('novel_chapter_id', 'desc')->get('novel_chapter', 4)->result(); ?>
 												<?php if (count($chapters) > 0) { ?>
 													<?php foreach ($chapters as $chapter) : ?>

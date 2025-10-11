@@ -35,8 +35,6 @@ class Member_model extends CI_Model
 	$this->db->or_like('nama', $q);
 	$this->db->or_like('email', $q);
 	$this->db->or_like('no_hp', $q);
-	$this->db->or_like('jk_kelamin', $q);
-	$this->db->or_like('alamat', $q);
 	$this->db->or_like('saldo_akun', $q);
 	$this->db->or_like('is_aktif', $q);
 	$this->db->or_like('photo', $q);

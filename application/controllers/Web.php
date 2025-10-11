@@ -28,22 +28,22 @@ class Web extends CI_Controller
 		$novel = $this->db->query("
 		SELECT max(novel_chapter.novel_chapter_id) as max, novel_chapter.created_at, novel.title, novel.rating, novel.novel_id, novel.thumbnail FROM `novel_chapter` JOIN novel ON novel_chapter.novel_id=novel.novel_id GROUP BY novel_chapter.novel_id ORDER BY max DESC LIMIT 8")->result();
 
-		//Novel terpopuler
 		$novel_fav = $this->db->query("
-			SELECT 
-				pembelian_chapter.novel_id,
-				novel.novel_id,
-				novel.title,
-				novel.rating,
-				novel.thumbnail,
-				count(pembelian_chapter.novel_id) as jumlah 
-			FROM `pembelian_chapter` 
-			INNER JOIN novel 
-			ON pembelian_chapter.novel_id = novel.novel_id
-			GROUP BY pembelian_chapter.novel_id
-			ORDER BY jumlah DESC
-			LIMIT 10;
-		")->result();
+    SELECT
+        novel.novel_id,
+        novel.title,
+        novel.rating,
+        novel.thumbnail,
+        COUNT(pembelian_chapter.pembelian_chapter_id) AS total_pembelian,
+        MAX(novel_chapter.nama_chapter) AS last_chapter
+    FROM pembelian_chapter
+    INNER JOIN novel ON pembelian_chapter.novel_id = novel.novel_id
+    INNER JOIN novel_chapter ON pembelian_chapter.novel_chapter_id = novel_chapter.novel_chapter_id
+    GROUP BY novel.novel_id, novel.title, novel.rating, novel.thumbnail
+    ORDER BY total_pembelian DESC
+    LIMIT 10
+")->result();
+
 
 		//Novel Bahasa Indonesia
 		$novel_ori = $this->db->where('type_id', 1)->order_by('novel_id', 'desc')->limit(10)->get('novel')->result();

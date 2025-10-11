@@ -37,12 +37,8 @@
 													<th>Username</th>
 													<th>Email</th>
 													<th>No Hp</th>
-													<th>Jk Kelamin</th>
-													<th>Alamat</th>
 													<th>Saldo Akun</th>
 													<th>Is Aktif</th>
-													<!-- <th>History Pembelian</th> -->
-													<!-- <th>History Topup</th> -->
 													<th>Action</th>
 												</tr>
 											</thead>
@@ -63,8 +59,6 @@
 														<td><?php echo $member->username ?></td>
 														<td><?php echo $member->email ?></td>
 														<td><?php echo $member->no_hp ?></td>
-														<td><?php echo $member->jk_kelamin ?></td>
-														<td><?php echo $member->alamat ?></td>
 														<td><?php echo rupiah($member->saldo_akun) ?></td>
 														<td><?php echo $member->is_aktif ?></td>
 														<!-- <td><a href="" class="btn btn-success btn-sm " delete=""><i class="fa fa-eye" aria-hidden="true"></i> View</a></td> -->

@@ -26,28 +26,6 @@
                                     <input type="text" placeholder="Phone" name="no_hp" id="no_hp" autocomplete="off" class="form-input-theme">
                                 </div>
                                 
-                                <!-- Jenis Kelamin Section -->
-                                <div class="gender-section mt-3">
-                                    <label class="gender-label">Jenis Kelamin</label>
-                                    <div class="gender-options">
-                                        <div class="gender-option">
-                                            <input class="gender-radio" type="radio" value="Laki Laki" name="jk_kelamin" id="laki_laki">
-                                            <label class="gender-label-radio" for="laki_laki">
-                                                Laki-laki
-                                            </label>
-                                        </div>
-                                        <div class="gender-option">
-                                            <input class="gender-radio" type="radio" value="Perempuan" name="jk_kelamin" id="perempuan">
-                                            <label class="gender-label-radio" for="perempuan">
-                                                Perempuan
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="custom_input_style__two mt-3">
-                                    <input type="text" placeholder="Alamat" name="alamat" id="alamat" autocomplete="off" class="form-input-theme">
-                                </div>
                                 <div class="custom_input_style__two mt-3">
                                     <input type="password" placeholder="Password" name="password" id="password" autocomplete="off" class="form-input-theme">
                                 </div>

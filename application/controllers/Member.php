@@ -32,8 +32,6 @@ class Member extends CI_Controller
 				'username' => $row->username,
 				'email' => $row->email,
 				'no_hp' => $row->no_hp,
-				'jk_kelamin' => $row->jk_kelamin,
-				'alamat' => $row->alamat,
 				'saldo_akun' => $row->saldo_akun,
 				'is_aktif' => $row->is_aktif,
 				'photo' => $row->photo,
@@ -56,8 +54,6 @@ class Member extends CI_Controller
 			'username' => set_value('username'),
 			'email' => set_value('email'),
 			'no_hp' => set_value('no_hp'),
-			'jk_kelamin' => set_value('jk_kelamin'),
-			'alamat' => set_value('alamat'),
 			'saldo_akun' => set_value('saldo_akun'),
 			'is_aktif' => set_value('is_aktif'),
 			'photo' => set_value('photo'),
@@ -88,8 +84,6 @@ class Member extends CI_Controller
 				'email' => $this->input->post('email', TRUE),
 				'username' => $this->input->post('username', TRUE),
 				'no_hp' => $this->input->post('no_hp', TRUE),
-				'jk_kelamin' => $this->input->post('jk_kelamin', TRUE),
-				'alamat' => $this->input->post('alamat', TRUE),
 				'saldo_akun' => $this->input->post('saldo_akun', TRUE),
 				'is_aktif' => $this->input->post('is_aktif', TRUE),
 				'photo' => $photo,
@@ -116,8 +110,6 @@ class Member extends CI_Controller
 				'email' => set_value('email', $row->email),
 				'username' => set_value('username', $row->username),
 				'no_hp' => set_value('no_hp', $row->no_hp),
-				'jk_kelamin' => set_value('jk_kelamin', $row->jk_kelamin),
-				'alamat' => set_value('alamat', $row->alamat),
 				'saldo_akun' => set_value('saldo_akun', $row->saldo_akun),
 				'is_aktif' => set_value('is_aktif', $row->is_aktif),
 				'photo' => set_value('photo', $row->photo),
@@ -162,8 +154,6 @@ class Member extends CI_Controller
 					'email' => $this->input->post('email', TRUE),
 					'username' => $this->input->post('username', TRUE),
 					'no_hp' => $this->input->post('no_hp', TRUE),
-					'jk_kelamin' => $this->input->post('jk_kelamin', TRUE),
-					'alamat' => $this->input->post('alamat', TRUE),
 					'saldo_akun' => $this->input->post('saldo_akun', TRUE),
 					'is_aktif' => $this->input->post('is_aktif', TRUE),
 					'photo' => $photo,
@@ -174,8 +164,6 @@ class Member extends CI_Controller
 					'email' => $this->input->post('email', TRUE),
 					'username' => $this->input->post('username', TRUE),
 					'no_hp' => $this->input->post('no_hp', TRUE),
-					'jk_kelamin' => $this->input->post('jk_kelamin', TRUE),
-					'alamat' => $this->input->post('alamat', TRUE),
 					'saldo_akun' => $this->input->post('saldo_akun', TRUE),
 					'is_aktif' => $this->input->post('is_aktif', TRUE),
 					'photo' => $photo,
@@ -218,8 +206,6 @@ class Member extends CI_Controller
 		$this->form_validation->set_rules('email', 'email', 'trim|required');
 		$this->form_validation->set_rules('username', 'Username', 'trim|required');
 		$this->form_validation->set_rules('no_hp', 'no hp', 'trim|required');
-		$this->form_validation->set_rules('jk_kelamin', 'jk kelamin', 'trim|required');
-		$this->form_validation->set_rules('alamat', 'alamat', 'trim|required');
 		$this->form_validation->set_rules('saldo_akun', 'saldo akun', 'trim|required');
 		$this->form_validation->set_rules('is_aktif', 'is aktif', 'trim|required');
 		$this->form_validation->set_rules('photo', 'photo', 'trim');

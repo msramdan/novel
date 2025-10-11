@@ -57,20 +57,6 @@
 									<td>No Hp <?php echo form_error('no_hp') ?></td>
 									<td><input type="text" class="form-control" name="no_hp" id="no_hp" placeholder="No Hp" value="<?php echo $no_hp; ?>" /></td>
 								</tr>
-								<tr>
-									<td>Jenis Kelamin <?php echo form_error('jk_kelamin') ?></td>
-									<td><select name="jk_kelamin" class="form-control theSelect" value="<?= $jk_kelamin ?>">
-											<option value="">-- Pilih --</option>
-											<option value="Laki Laki" <?php echo $jk_kelamin == 'Laki Laki' ? 'selected' : 'null' ?>>Laki Laki</option>
-											<option value="Perempuan" <?php echo $jk_kelamin == 'Perempuan' ? 'selected' : 'null' ?>>Perempuan</option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>Alamat <?php echo form_error('alamat') ?></td>
-									<td> <textarea class="form-control" rows="3" name="alamat" id="alamat" placeholder="Alamat"><?php echo $alamat; ?></textarea></td>
-								</tr>
-
 								<?php if ($this->uri->segment(2) == "create" || $this->uri->segment(2) == "create_action") { ?>
 									<tr>
 										<td>Saldo Akun <?php echo form_error('saldo_akun') ?></td>

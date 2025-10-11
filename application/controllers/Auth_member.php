@@ -64,8 +64,6 @@ class Auth_member extends CI_Controller {
 						'username' => $this->input->post('username', true),
 						'password' => sha1($this->input->post('password', true)),
 						'no_hp' => $this->input->post('no_hp', true),
-						'jk_kelamin' => $this->input->post('jk_kelamin'),
-						'alamat' => $this->input->post('alamat'),
 						'created_at' => date('Y-m-d H:i:s'),
 						'is_aktif' => 'Aktif',
 					];
